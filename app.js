@@ -8,6 +8,7 @@ const cors = require("cors");
 const constants = require("./src/constants/constants");
 const { MESSAGES } = constants;
 const database = require("./src/database/database");
+const rootRoute = require("./src/routes/index.route");
 const app = express();
 
 
@@ -20,6 +21,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
 });
+
+//All requests of all types are pushed to this route to be handled
+app.use('/api/v1', rootRoute);
 
 //Set our default port to 5000
 const PORT = process.env.PORT || 5000;

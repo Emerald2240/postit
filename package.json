@@ -1,8 +1,20 @@
 {
+  "name": "Postit Social Media API",
+  "version": "1.0.0",
+  "description": "This is a twitter like social media app. Users can login, post content and comment.",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^7.0.1"
+    "joi": "^17.8.3",
+    "mongoose": "^7.0.1",
+    "nodemon": "^2.0.21"
   }
 }
