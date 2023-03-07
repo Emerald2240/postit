@@ -66,6 +66,27 @@ class UserController {
         }
     }
 
+//get all users in the user collection/table
+async fetchAllDeletedUsers(req, res) {
+    try {
+        const data = await userService.getAllDeletedUsers();
+
+        if (data) {
+            res
+                .status(200)
+                .send({ message: MESSAGES.FETCHED, success: true, data });
+        } else {
+            res
+                .status(404)
+                .send({ message: MESSAGES.NOT_FOUND, success: false, data });
+        }
+    } catch (err) {
+        res
+            .status(500)
+            .send({ message: err.message || MESSAGES.ERROR, success: false });
+    }
+}
+
     //Update/edit user data
     async updateUserProfile(req, res) {
         try {

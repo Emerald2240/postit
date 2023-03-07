@@ -25,12 +25,17 @@ class UserService {
         //Makes email search filter case insensitive and a lot more broad(even if search parameter isnt completely correct.)
         let emailRegexed = new RegExp(email, 'i');
 
-        return await User.findOne({ email: emailRegexed });
+        return await User.findOne({ email: emailRegexed, deleted: false });
     }
 
     async getAllUsers() {
-        return await User.find();
+        return await User.find({deleted: false});
     }
+
+    async getAllDeletedUsers() {
+        return await User.find({deleted: true});
+    }
+
 
     async updateUserByEmail(email, data) {
 
@@ -40,7 +45,8 @@ class UserService {
     }
 
     async deleteUser(email) {
-        return await User.findOneAndDelete({ email: email });
+        // return await User.findOneAndDelete({ email: email });
+        return await User.findOneAndUpdate({ email: email }, { deleted: true }, { new: true });
     }
 }
 

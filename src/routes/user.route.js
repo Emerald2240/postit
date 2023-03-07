@@ -11,6 +11,7 @@ userRouter.post("/",[validateBody(signUpSchema)], userController.signUp);
 
 //READ
 userRouter.get("/", userController.fetchAllUsers);
+userRouter.get("/deleted", userController.fetchAllDeletedUsers);
 userRouter.get("/:email", [validateParams(emailSchema)],  userController.fetchUser);
 
 //UPDATE
