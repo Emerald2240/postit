@@ -2,10 +2,13 @@ const constants = {
     DATABASE_URI: process.env.DATABASE_URI,
 
     DATABASES: {
-        
+        POSTIT: "postit",
+        COMMENT: "comment",
+        USER: "user"
     },
     USER_TYPES: {
-       
+        USER: "user",
+        ADMIN: "admin"
     },
     MESSAGES: {
         FETCHED: "Resource fetched successfully",

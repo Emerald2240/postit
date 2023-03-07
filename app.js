@@ -7,6 +7,7 @@ dotenv.config();
 const cors = require("cors");
 const constants = require("./src/constants/constants");
 const { MESSAGES } = constants;
+const database = require("./src/database/database");
 const app = express();
 
 
@@ -27,4 +28,5 @@ const PORT = process.env.PORT || 5000;
 // App/Server Start Section
 app.listen(PORT, () => {
     console.log(`Server started on port: ${PORT}`);
+database();
 });
