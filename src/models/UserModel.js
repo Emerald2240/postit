@@ -18,6 +18,7 @@ const UserSchema = new Schema({
     },
     handle:{
         type: String,
+        unique: true,
         required:true
     },
     avatar:{

@@ -3,6 +3,8 @@ const userRouter = express.Router();
 const userController = require('../controllers/user.controller');
 const {validateBody} = require("../validators/validatorBody");
 const {validateParams} = require("../validators/validatorParams");
+const authenticateToken = require('../middlewares/auth.middleware')
+const adminAuthorization = require("../middlewares/adminPriviledges.middleware")
 
 const {signUpSchema, emailSchema, updateUserSchema} = require("../validators/schemas/user.schema");
 
@@ -10,14 +12,14 @@ const {signUpSchema, emailSchema, updateUserSchema} = require("../validators/sch
 userRouter.post("/",[validateBody(signUpSchema)], userController.signUp);
 
 //READ
-userRouter.get("/", userController.fetchAllUsers);
-userRouter.get("/deleted", userController.fetchAllDeletedUsers);
-userRouter.get("/:email", [validateParams(emailSchema)],  userController.fetchUser);
+userRouter.get("/", [authenticateToken, adminAuthorization], userController.fetchAllUsers);
+userRouter.get("/deleted", [authenticateToken, adminAuthorization], userController.fetchAllDeletedUsers);
+userRouter.get("/:email", [validateParams(emailSchema), authenticateToken, adminAuthorization], userController.fetchUser);
 
 //UPDATE
-userRouter.patch("/:email",  [validateParams(emailSchema), validateBody(updateUserSchema)],  userController.updateUserProfile);
+userRouter.patch("/:email",  [validateParams(emailSchema), validateBody(updateUserSchema), authenticateToken],  userController.updateUserProfile);
 
 //DELETE
-userRouter.delete("/:email",  [validateParams(emailSchema)],  userController.deleteUserAccount);
+userRouter.delete("/:email",  [validateParams(emailSchema), authenticateToken],  userController.deleteUserAccount);
 
 module.exports = userRouter;
