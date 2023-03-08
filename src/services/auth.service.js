@@ -2,7 +2,7 @@ const express = require('express');
 const authRouter = express.Router();
 const dotenv = require("dotenv");
 dotenv.config();
-userController = require("../controllers/user.controller")
+userController = require("../controllers/user.controller");
 const constants = require("../constants/constants");
 const { MESSAGES } = constants;
 const User = require("../models/UserModel");

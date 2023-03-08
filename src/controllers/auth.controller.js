@@ -54,11 +54,11 @@ class AuthController {
                     .json({ message: MESSAGES.LOGGED_IN, accessToken: accessToken, refreshToken: refreshToken });
             } else {
                 res.status(403)
-                    .send({ message: MESSAGES.LOGIN_FAILURE });
+                    .send({ message: MESSAGES.LOGIN_FAILURE, success: false });
             }
 
         } catch (err) {
-            res.status(418).send({ message: "Invalid credentials" })
+            res.status(418).send({ message: "Invalid credentials", success: false })
         }
     }
 

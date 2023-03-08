@@ -12,7 +12,9 @@ const {signUpSchema, emailSchema, updateUserSchema} = require("../validators/sch
 userRouter.post("/",[validateBody(signUpSchema)], userController.signUp);
 
 //READ
-userRouter.get("/", [authenticateToken, adminAuthorization], userController.fetchAllUsers);
+// userRouter.get("/", [authenticateToken, adminAuthorization], userController.fetchAllUsers);
+userRouter.get("/", userController.fetchAllUsers);
+
 userRouter.get("/deleted", [authenticateToken, adminAuthorization], userController.fetchAllDeletedUsers);
 userRouter.get("/:email", [validateParams(emailSchema), authenticateToken, adminAuthorization], userController.fetchUser);
 

@@ -12,20 +12,8 @@ const PostitSchema = new Schema({
         type: String,
         required: true
     },
-    views: {
-        type: Number,
-        default: 0
-    },
-    likes:{
-        type: Number,
-        default: 0
-    },
-    dislikes:{
-        type: Number,
-        default: 0
-    },
-    deleted:{
-        type:Boolean,
+    deleted: {
+        type: Boolean,
         default: false
     }
 },
@@ -34,5 +22,5 @@ const PostitSchema = new Schema({
     }
 );
 
-const Room = model(DATABASES.ROOM, RoomSchema);
-module.exports = Room;
+const Postit = model(DATABASES.POSTIT, PostitSchema);
+module.exports = Postit;

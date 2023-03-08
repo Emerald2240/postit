@@ -1,7 +1,6 @@
 const userService = require('../services/user.service');
 const constants = require("../constants/constants");
 const { MESSAGES } = constants;
-const joi = require('joi');
 
 class UserController {
 
