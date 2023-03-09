@@ -7,7 +7,7 @@ const authenticateToken = require('../middlewares/auth.middleware')
 const adminAuthorization = require("../middlewares/adminPriviledges.middleware")
 const { createPostitSchema, getAllPostitsSchema, getUserDeletedPostitsSchema, getExternalUsersPostitsSchema, postitIdSchema, updatePostitSchema } = require("../validators/schemas/postit.schema");
 
-//Create Postit
+//Create Postit   
 postitRouter.post("/", [validateBody(createPostitSchema), authenticateToken], postitController.createPostit);
 
 //Get all postits created by logged in user

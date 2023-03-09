@@ -4,14 +4,31 @@ const { MESSAGES } = constants;
 
 class PostitController {
     async createPostit(req, res) {
-        res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
+        try {
+            req.body.user_id = req.user._id;
+            const data = await postitService.createPostit(req.body);
+            res.status(201)
+                .send({ message: MESSAGES.CREATED, success: true, data });
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     async fetchAllPostits(req, res) {
-        res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
-    }
-
-    async createPostit(req, res) {
         res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
     }
 

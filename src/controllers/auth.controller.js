@@ -43,7 +43,7 @@ class AuthController {
         try {
             //pass the data to the login service module
             user = await authService.login(req.body.email, req.body.password);
-            console.log(user);
+            // console.log(user);
             if (user) {
 
                 //creates new access token and refresh token for the user
