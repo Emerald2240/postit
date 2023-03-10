@@ -28,15 +28,18 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true,
+        select: false
     },
     user_type: {
         type: String,
         required: true,
+        select: false,
         enum: [USER_TYPES.USER, USER_TYPES.ADMIN],
     },
     deleted: {
         type: Boolean,
         required: false,
+        select: false,
         default: 0
     }
 },

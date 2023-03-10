@@ -1,0 +1,6 @@
+make sure users are not able to edit themselves into admins
+refresh tokens shouldnt be passed in the body. postman is complaining
+find an accurate limit for jwt token expiry
+stop deletion status from showing to regular users
+fine tune error messages. they are currently just returning null
+do not return password at all. Try to prevent this in the model or service.

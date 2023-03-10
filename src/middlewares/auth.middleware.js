@@ -10,7 +10,7 @@ const authenticateToken = (req, res, next) => {
     } else {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) return res.status(403).send({ message: "Please login first", err });
-            req.user = user
+            req.user = user;
             next();
         });
     }

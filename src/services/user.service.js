@@ -28,12 +28,19 @@ class UserService {
         return await User.findOne({ email: emailRegexed, deleted: false });
     }
 
-    async getAllUsers() {
-        return await User.find({deleted: false});
+    async getAllUsers(pagination) {
+        return await User.find({ deleted: false })
+        .limit(pagination)
+            .sort({ createdAt: 'desc' });
+
+        // return await User.find({deleted: false}).select('-user_type ');
     }
 
-    async getAllDeletedUsers() {
-        return await User.find({deleted: true});
+    async getAllDeletedUsers(pagination) {
+        return await User.find({ deleted: true })
+        .limit(pagination)
+            .sort({ createdAt: 'desc' });
+
     }
 
 

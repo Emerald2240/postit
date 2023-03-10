@@ -29,7 +29,7 @@ class AuthController {
                     } else {
                         
                         //create a new access token
-                        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' });
+                        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1000m' });//Temporary time limit
                         res.json({ accessToken: accessToken });
                     }
                 })
@@ -43,7 +43,7 @@ class AuthController {
         try {
             //pass the data to the login service module
             user = await authService.login(req.body.email, req.body.password);
-            console.log(user);
+            // console.log(user);
             if (user) {
 
                 //creates new access token and refresh token for the user
@@ -54,11 +54,11 @@ class AuthController {
                     .json({ message: MESSAGES.LOGGED_IN, accessToken: accessToken, refreshToken: refreshToken });
             } else {
                 res.status(403)
-                    .send({ message: MESSAGES.LOGIN_FAILURE });
+                    .send({ message: MESSAGES.LOGIN_FAILURE, success: false });
             }
 
         } catch (err) {
-            res.status(418).send({ message: "Invalid credentials" })
+            res.status(418).send({ message: "Invalid credentials", success: false })
         }
     }
 

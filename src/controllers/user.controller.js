@@ -1,7 +1,6 @@
 const userService = require('../services/user.service');
 const constants = require("../constants/constants");
 const { MESSAGES } = constants;
-const joi = require('joi');
 
 class UserController {
 
@@ -48,7 +47,8 @@ class UserController {
     //get all users in the user collection/table
     async fetchAllUsers(req, res) {
         try {
-            const data = await userService.getAllUsers();
+            let pagination = req.params.pagination * 10;
+            const data = await userService.getAllUsers(pagination);
 
             if (data) {
                 res
@@ -69,7 +69,8 @@ class UserController {
 //get all users in the user collection/table
 async fetchAllDeletedUsers(req, res) {
     try {
-        const data = await userService.getAllDeletedUsers();
+        let pagination = req.params.pagination * 10;
+        const data = await userService.getAllDeletedUsers(pagination);
 
         if (data) {
             res
