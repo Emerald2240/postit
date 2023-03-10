@@ -1,6 +1,5 @@
-const { model, Schema, SchemaType } = require("mongoose");
+const { model, Schema } = require("mongoose");
 const constants = require("../constants/constants");
-const { USER_TYPES, DATABASES } = constants;
 
 const CommentSchema = new Schema({
     user_id: {
@@ -27,5 +26,5 @@ const CommentSchema = new Schema({
     }
 );
 
-const Room = model(DATABASES.ROOM, RoomSchema);
-module.exports = Room;
+const Comment = model(DATABASES.COMMENT, CommentSchema);
+module.exports = Comment;
