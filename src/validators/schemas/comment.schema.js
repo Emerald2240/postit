@@ -13,14 +13,18 @@ const commentSchema = joi.object({
 });
 
 //READ
-const getCommentSchema = joi.object({
-    commentId: joi.string()
+const getAllPostitCommentsSchema = joi.object({
+    postitId: joi.string()
     .min(24)
+    .required(),
+
+    pagination: joi.number()
+    .min(1)
     .required()
 });
 
-const getAllPostitCommentsSchema = joi.object({
-    postitId: joi.string()
+const getCommentSchema = joi.object({
+    commentId: joi.string()
     .min(24)
     .required()
 });
@@ -29,18 +33,42 @@ const searchPostitForCommentSchema = joi.object({
     searchText: joi.string()
     .min(3)
     .max(250)
+    .required(),
+
+    pagination: joi.number()
+    .min(1)
     .required()
 });
 
-const getAllDeletedCommentsSchema = joi.object({});
+const getAllDeletedCommentsSchema = joi.object({
+    postitId: joi.string()
+    .min(24)
+    .required(),
+
+    pagination: joi.number()
+    .min(1)
+    .required()
+});
+
+const getAllUserDeletedCommentsSchema = joi.object({
+    userId: joi.string()
+    .min(24)
+    .required(),
+
+    pagination: joi.number()
+    .min(1)
+    .required()
+});
 
 
 //UPDATE
-const editCommentSchema = joi.object({
+const commentIdSchema = joi.object({
     commentId: joi.string()
     .min(24)
-    .required(),
-    
+    .required()
+});
+
+const editCommentSchema = joi.object({
     body: joi.string()
     .min(3)
     .max(250)
@@ -48,11 +76,5 @@ const editCommentSchema = joi.object({
 });
 
 
-//DELETE
-const deleteCommentSchema = joi.object({
-    commentId: joi.string()
-    .min(24)
-    .required()
-})
 
-module.exports = { commentSchema, getCommentSchema, getAllPostitCommentsSchema, searchPostitForCommentSchema, getAllDeletedCommentsSchema, editCommentSchema, deleteCommentSchema };
+module.exports = {commentIdSchema, commentSchema, getCommentSchema, getAllPostitCommentsSchema, searchPostitForCommentSchema, getAllDeletedCommentsSchema, getAllUserDeletedCommentsSchema, editCommentSchema };
