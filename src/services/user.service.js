@@ -30,6 +30,7 @@ class UserService {
 
     async getAllUsers() {
         return await User.find({deleted: false});
+        // return await User.find({deleted: false}).select('-user_type ');
     }
 
     async getAllDeletedUsers() {

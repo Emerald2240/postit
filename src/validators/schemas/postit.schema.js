@@ -24,7 +24,7 @@ const getUserDeletedPostitsSchema = joi.object({
 });
 
 const getExternalUsersPostitsSchema = joi.object({
-    handle: joi.string()
+    userHandle: joi.string()
         .min(3)
         .required(),
 
@@ -35,7 +35,7 @@ const getExternalUsersPostitsSchema = joi.object({
 
 const postitIdSchema = joi.object({
     postitId: joi.string()
-        .min(3)
+        .min(24)
         .required()
 })
 

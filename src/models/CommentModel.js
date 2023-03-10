@@ -16,21 +16,10 @@ const CommentSchema = new Schema({
         type: String,
         required: true
     },
-    views: {
-        type: Number,
-        default: 0
-    },
-    likes:{
-        type: Number,
-        default: 0
-    },
-    dislikes:{
-        type: Number,
-        default: 0
-    },
     deleted:{
         type:Boolean,
-        default: false
+        default: false,
+        select: false
     }
 },
     {

@@ -29,7 +29,7 @@ class AuthController {
                     } else {
                         
                         //create a new access token
-                        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' });
+                        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1000m' });//Temporary time limit
                         res.json({ accessToken: accessToken });
                     }
                 })

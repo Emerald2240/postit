@@ -11,10 +11,10 @@ const { createPostitSchema, getAllPostitsSchema, getUserDeletedPostitsSchema, ge
 postitRouter.post("/", [validateBody(createPostitSchema), authenticateToken], postitController.createPostit);
 
 //Get all postits created by logged in user
-postitRouter.get("/:pagination", [validateParams(getAllPostitsSchema), authenticateToken], postitController.fetchAllPostits);
+postitRouter.get("/:pagination", [validateParams(getAllPostitsSchema), authenticateToken], postitController.getUserPostits);
 
 //Get postits created by an external user handle
-postitRouter.get("/:handle/:pagination", [validateParams(getExternalUsersPostitsSchema), authenticateToken, adminAuthorization], postitController.getExternalUserPostits);
+postitRouter.get("/external/:userHandle/:pagination", [validateParams(getExternalUsersPostitsSchema), authenticateToken, adminAuthorization], postitController.getExternalUserPostits);
 
 //Update postit by its Id
 postitRouter.patch("/:postitId", [validateParams(postitIdSchema), validateBody(updatePostitSchema), authenticateToken], postitController.updatePostit);
@@ -23,20 +23,10 @@ postitRouter.patch("/:postitId", [validateParams(postitIdSchema), validateBody(u
 postitRouter.delete("/:postitId", [validateParams(postitIdSchema), authenticateToken], postitController.deletePostit);
 
 
-
-
-
-
-
-
 /////////////// ADMIN /////////////////////////////////
 
-//Get all postits deleted softly by user [admin]
-postitRouter.get("/deleted/:handle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
-
-
-
-
+//Get all postits deleted softly by user [admin]     
+postitRouter.get("/deleted/:userHandle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
 
 
 module.exports = postitRouter;

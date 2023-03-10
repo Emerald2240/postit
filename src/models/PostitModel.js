@@ -14,7 +14,8 @@ const PostitSchema = new Schema({
     },
     deleted: {
         type: Boolean,
-        default: false
+        default: false,
+        select: false
     }
 },
     {
