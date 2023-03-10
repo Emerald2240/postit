@@ -12,7 +12,7 @@ class PostItService {
     async getUserPostits(userId, pagination) {
         return await Postit.find({ user_id: userId, deleted: false })
             .limit(pagination)
-            .sort({ createdAt: 'asc' });
+            .sort({ createdAt: 'desc' });
     }
 
     async getExternalUserPostits(userHandle, pagination) {
