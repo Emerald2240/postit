@@ -1,6 +1,5 @@
 const Postit = require("../models/PostitModel");
 const User = require("../models/UserModel");
-const mongoose = require("mongoose")
 
 class PostItService {
 
@@ -9,12 +8,12 @@ class PostItService {
         return await Postit.create(postit);
     }
 
-    async findPostit(postitId){
-        return await Postit.findOne({'_id':postitId, 'deleted':false}).populate('user_id');
+    async findPostit(postitId) {
+        return await Postit.findOne({ '_id': postitId, 'deleted': false }).populate('user_id');
     }
 
-    async findDeletedPostit(postitId){
-        return await Postit.findOne({'_id':postitId, 'deleted':true}).populate('user_id');
+    async findDeletedPostit(postitId) {
+        return await Postit.findOne({ '_id': postitId, 'deleted': true }).populate('user_id');
     }
 
     async getUserPostits(userId, pagination) {

@@ -1,6 +1,6 @@
 const { model, Schema } = require("mongoose");
 const constants = require("../constants/constants");
-const {DATABASES} = constants;
+const { DATABASES } = constants;
 
 const CommentSchema = new Schema({
     user_id: {
@@ -8,7 +8,7 @@ const CommentSchema = new Schema({
         ref: DATABASES.USER,
         required: true
     },
-    postit_ref_id:{
+    postit_ref_id: {
         type: Schema.Types.ObjectId,
         ref: DATABASES.POSTIT,
         required: true
@@ -17,8 +17,8 @@ const CommentSchema = new Schema({
         type: String,
         required: true
     },
-    deleted:{
-        type:Boolean,
+    deleted: {
+        type: Boolean,
         default: false,
         select: false
     }

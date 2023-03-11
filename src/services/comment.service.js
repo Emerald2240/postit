@@ -1,9 +1,6 @@
 const Comment = require("../models/CommentModel");
 const UserService = require("../services/user.service");
 const PostitService = require("./postit.service");
-const constants = require("../constants/constants");
-const { comment } = require("../controllers/comment.controller");
-const { DATABASES } = constants;
 
 class CommentService {
     async getAllComments(pagination) {
