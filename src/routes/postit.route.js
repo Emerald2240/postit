@@ -16,6 +16,13 @@ postitRouter.get("/:pagination", [validateParams(getAllPostitsSchema), authentic
 //Get postits created by an external user handle
 postitRouter.get("/external/:userHandle/:pagination", [validateParams(getExternalUsersPostitsSchema), authenticateToken, adminAuthorization], postitController.getExternalUserPostits);
 
+//Find a particular postit using its postitid
+postitRouter.get("/single/:postitId", [validateParams(postitIdSchema), authenticateToken, adminAuthorization], postitController.getSinglePostit);
+
+//Find a particular deleted postit using its postitid [admin]
+postitRouter.get("/single-deleted/:postitId", [validateParams(postitIdSchema), authenticateToken, adminAuthorization], postitController.getSingleDeletedPostit);
+
+
 //Update postit by its Id
 postitRouter.patch("/:postitId", [validateParams(postitIdSchema), validateBody(updatePostitSchema), authenticateToken], postitController.updatePostit);
 

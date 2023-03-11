@@ -9,34 +9,42 @@ class PostItService {
         return await Postit.create(postit);
     }
 
+    async findPostit(postitId){
+        return await Postit.findOne({'_id':postitId, 'deleted':false});
+    }
+
+    async findDeletedPostit(postitId){
+        return await Postit.findOne({'_id':postitId, 'deleted':true});
+    }
+
     async getUserPostits(userId, pagination) {
-        return await Postit.find({ user_id: userId, deleted: false })
+        return await Postit.find({ 'user_id': userId, 'deleted': false })
             .limit(pagination)
-            .sort({ createdAt: 'desc' });
+            .sort({ 'createdAt': 'desc' });
     }
 
     async getExternalUserPostits(userHandle, pagination) {
-        let userInfo = await User.findOne({ handle: userHandle, deleted: false });
+        let userInfo = await User.findOne({ 'handle': userHandle, 'deleted': false });
         // console.log(userInfo);
         if (!userInfo) {
             return null;
         } else {
-            return await Postit.find({ user_id: userInfo._id, deleted: false })
+            return await Postit.find({ 'user_id': userInfo._id, 'deleted': false })
                 .limit(pagination)
-                .sort({ createdAt: 'desc' })
+                .sort({ 'createdAt': 'desc' })
         }
     }
 
     async updatePostit(postitId, update) {
-        return await Postit.findOneAndUpdate({ _id: postitId }, update, { new: true });
+        return await Postit.findOneAndUpdate({ '_id': postitId }, update, { new: true });
     }
 
     async deletePostit(postitId, loggedInUserId) {
         // return await User.findOneAndDelete({ email: email });
-        let postInfo = await Postit.findOne({ _id: postitId });
+        let postInfo = await Postit.findOne({ '_id': postitId });
         if (postInfo) {
             if (loggedInUserId == postInfo.user_id) {
-                return await Postit.findOneAndUpdate({ _id: postitId }, { deleted: true }, { new: true });
+                return await Postit.findOneAndUpdate({ '_id': postitId }, { 'deleted': true }, { new: true });
             } else {
                 return null;
             }
@@ -46,14 +54,14 @@ class PostItService {
     }
 
     async getUserDeletedPostits(userHandle, pagination) {
-        let userInfo = await User.findOne({ handle: userHandle, deleted: false });
+        let userInfo = await User.findOne({ 'handle': userHandle, 'deleted': false });
         // console.log(userInfo);
         if (!userInfo) {
             return null;
         } else {
-            return await Postit.find({ user_id: userInfo._id, deleted: true })
+            return await Postit.find({ 'user_id': userInfo._id, 'deleted': true })
                 .limit(pagination)
-                .sort({ createdAt: 'desc' })
+                .sort({ 'createdAt': 'desc' })
         }
     }
 }

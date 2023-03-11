@@ -3,14 +3,16 @@ const commentRouter = express.Router();
 const commentController = require('../controllers/comment.controller');
 const {validateBody} = require("../validators/validatorBody");
 const {validateParams} = require("../validators/validatorParams");
-const authenticateToken = require('../middlewares/auth.middleware')
-const adminAuthorization = require("../middlewares/adminPriviledges.middleware")
+const authenticateToken = require('../middlewares/auth.middleware');
+const adminAuthorization = require("../middlewares/adminPriviledges.middleware");
+
 
 const { commentIdSchema, paginationSchema, commentSchema, getCommentSchema, getAllPostitCommentsSchema, searchPostitForCommentSchema, getAllDeletedCommentsSchema, getAllUserDeletedCommentsSchema, editCommentSchema, postitIdSchema } = require("../validators/schemas/comment.schema");
 
+    
 // CREATE //////////////////////////////////////////////////////////////
 //Create comment
-commentRouter.post("/", [validateBody(commentSchema), authenticateToken], commentController.comment);
+commentRouter.post("/", [ validateBody(commentSchema), authenticateToken], commentController.comment);
 
 
 // READ //////////////////////////////////////////////////////////////
@@ -30,7 +32,6 @@ commentRouter.get("/postit-deleted/:postitId/:pagination", [validateParams(getAl
 commentRouter.get("/user-deleted/:userId/:pagination", [validateParams(getAllUserDeletedCommentsSchema), authenticateToken, adminAuthorization], commentController.getAllUserDeletedComments);
 
 
-
 // UPDATE //////////////////////////////////////////////////////////////
 // Update a particular comment
 commentRouter.patch("/:commentId", [validateParams(commentIdSchema), validateBody(editCommentSchema), authenticateToken], commentController.editComment);
@@ -38,7 +39,7 @@ commentRouter.patch("/:commentId", [validateParams(commentIdSchema), validateBod
 
 // DELETE //////////////////////////////////////////////////////////////
 //Delete a particular comment
-commentRouter.delete("/:commentId" [validateParams(commentIdSchema), authenticateToken], commentController.deleteComment);
+commentRouter.delete("/:commentId", [validateParams(commentIdSchema), authenticateToken], commentController.deleteComment);
 
 
 module.exports = commentRouter;

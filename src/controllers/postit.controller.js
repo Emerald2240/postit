@@ -16,6 +16,48 @@ class PostitController {
         }
     }
 
+    async getSinglePostit(req, res) {
+        let postitId = req.params.postitId;
+
+        try {
+            const data = await postitService.findPostit(postitId);
+
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false })
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+
+    }
+
+    async getSingleDeletedPostit(req, res) {
+        let postitId = req.params.postitId;
+
+        try {
+            const data = await postitService.findDeletedPostit(postitId);
+
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false })
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+
+    }
+
     async getUserPostits(req, res) {
         try {
             let userId = req.user._id;
@@ -106,13 +148,14 @@ class PostitController {
                     .send({ message: MESSAGES.FETCHED, success: true, data });
             } else {
                 res.status(404)
-                    .send({ message: "Postit not found", success: false});
+                    .send({ message: "Postit not found", success: false });
             }
         } catch (err) {
             res
                 .status(500)
                 .send({ message: err.message || MESSAGES.ERROR, success: false });
-        }    }
+        }
+    }
 
 }
 

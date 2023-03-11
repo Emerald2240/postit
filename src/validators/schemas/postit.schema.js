@@ -14,7 +14,7 @@ const getAllPostitsSchema = joi.object({
 });
 
 const getUserDeletedPostitsSchema = joi.object({
-    handle: joi.string()
+    userHandle: joi.string()
         .min(3)
         .required(),
 

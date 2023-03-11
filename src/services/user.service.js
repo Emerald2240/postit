@@ -18,28 +18,39 @@ class UserService {
 
         user.avatar = await generateRandomAvatar(user.email);
 
-        return await User.create(user);
+        let createdUser = await User.create(user);
+        return ({
+            first_name: createdUser.first_name,
+            last_name: createdUser.last_name,
+            email: createdUser.email,
+            handle: createdUser.handle,
+            avatar: createdUser.avatar,
+            _id: createdUser._id,
+            createdAt: createdUser.createdAt,
+            updatedAt: createdUser.updatedAt
+        })
+
     }
 
     async getUser(email) {
         //Makes email search filter case insensitive and a lot more broad(even if search parameter isnt completely correct.)
         let emailRegexed = new RegExp(email, 'i');
 
-        return await User.findOne({ email: emailRegexed, deleted: false });
+        return await User.findOne({ 'email': emailRegexed, 'deleted': false });
     }
 
     async getAllUsers(pagination) {
-        return await User.find({ deleted: false })
-        .limit(pagination)
-            .sort({ createdAt: 'desc' });
+        return await User.find({ 'deleted': false })
+            .limit(pagination)
+            .sort({ 'createdAt': 'desc' });
 
-        // return await User.find({deleted: false}).select('-user_type ');
+        // return await User.find({'deleted': false}).select('-user_type ');
     }
 
     async getAllDeletedUsers(pagination) {
-        return await User.find({ deleted: true })
-        .limit(pagination)
-            .sort({ createdAt: 'desc' });
+        return await User.find({ 'deleted': true })
+            .limit(pagination)
+            .sort({ 'createdAt': 'desc' });
 
     }
 
@@ -48,12 +59,12 @@ class UserService {
 
         //makes email case insensitive
         let emailRegexed = new RegExp(email, 'i');
-        return await User.findOneAndUpdate({ email: emailRegexed }, data, { new: true });
+        return await User.findOneAndUpdate({ 'email': emailRegexed }, data, { new: true });
     }
 
     async deleteUser(email) {
         // return await User.findOneAndDelete({ email: email });
-        return await User.findOneAndUpdate({ email: email }, { deleted: true }, { new: true });
+        return await User.findOneAndUpdate({ 'email': email }, { 'deleted': true }, { new: true });
     }
 }
 

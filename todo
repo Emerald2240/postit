@@ -2,3 +2,6 @@ refresh tokens shouldnt be passed in the body. postman is complaining
 find an accurate limit for jwt token expiry
 fine tune error messages. they are currently just returning null
 populate reference values at the right places
+add a getparticular user function to postman users collection
+dont forget to readd auth to getAllUsers and getAllDeletedusers routes when youre done
+Remove sensitive comment data in the createComment function

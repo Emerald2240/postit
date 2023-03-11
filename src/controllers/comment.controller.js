@@ -1,4 +1,4 @@
-const controllerService = require("../services/comment.service");
+const commentService = require("../services/comment.service");
 const constants = require("../constants/constants");
 const { MESSAGES } = constants;
 
@@ -9,14 +9,21 @@ class CommentController {
 
     //Create a comment
     async comment(req, res) {
-        let postitId = req.params.postitId;
-        let commentBody = req.body.body;
+        let commentBody = {
+            user_id: req.user._id,
+            postit_ref_id: req.body.postitId,
+            body: req.body.body
+        }
 
         try {
-            const data = await commentService.createComment(postitId, commentBody);
-
-            res.status(201)
-                .send({ message: MESSAGES.CREATED, success: true, data });
+            const data = await commentService.createComment(commentBody);
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.CREATED, success: true, data });
+            } else {
+                res.status(403)
+                    .send({ message: MESSAGES.ERROR, success: false })
+            }
         } catch (err) {
             res
                 .status(500)
@@ -30,7 +37,7 @@ class CommentController {
         let pagination = req.params.pagination
 
         try {
-            const data = await commentService.getAllCommentsForPostits(postitId, pagination);
+            const data = await commentService.getAllCommentsForPostit(postitId, pagination);
 
             res.status(201)
                 .send({ message: MESSAGES.FETCHED, success: true, data });
