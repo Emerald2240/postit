@@ -39,9 +39,14 @@ class UserService {
         return await User.findOne({ 'email': emailRegexed, 'deleted': false });
     }
 
+    async getUserWithUserId(userId) {
+        return await User.findOne({ '_id': userId, 'deleted': false });
+    }
+
     async getAllUsers(pagination) {
         return await User.find({ 'deleted': false })
-            .limit(pagination)
+            .limit(10)
+            .skip(pagination)
             .sort({ 'createdAt': 'desc' });
 
         // return await User.find({'deleted': false}).select('-user_type ');
@@ -49,7 +54,8 @@ class UserService {
 
     async getAllDeletedUsers(pagination) {
         return await User.find({ 'deleted': true })
-            .limit(pagination)
+            .limit(10)
+            .skip(pagination)
             .sort({ 'createdAt': 'desc' });
 
     }

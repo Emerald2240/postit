@@ -1,20 +1,23 @@
 const Comment = require("../models/CommentModel");
-const User = require("../models/UserModel");
+const UserService = require("../services/user.service");
 const PostitService = require("./postit.service");
 const constants = require("../constants/constants");
+const { comment } = require("../controllers/comment.controller");
 const { DATABASES } = constants;
 
 class CommentService {
     async getAllComments(pagination) {
         return await Comment.find({ 'deleted': false }).populate('user_id')
-            .limit(pagination)
+            .limit(10)
+            .skip(pagination)
             .sort({ 'createdAt': 'desc' })
             .populate('postit_ref_id');
     }
 
     async getAllDeletedComments(pagination) {
         return await Comment.find({ 'deleted': true }).populate('user_id')
-            .limit(pagination)
+            .limit(10)
+            .skip(pagination)
             .sort({ 'createdAt': 'desc' })
             .populate('postit_ref_id');
     }
@@ -40,9 +43,9 @@ class CommentService {
 
         let postitInfo = await PostitService.findPostit(postitId);
         if (postitInfo) {
-            //create the actual comment body
             let allComments = await Comment.find({ 'postit_ref_id': postitId, 'deleted': false })
-                .limit(pagination)
+                .limit(10)
+                .skip(pagination)
                 .sort({ 'createdAt': 'desc' })
                 .populate('user_id');
             if (allComments) {
@@ -60,23 +63,68 @@ class CommentService {
     }
 
     async searchComments(postitId, pagination, searchText) {
-        return { message: "It works", success: true }
+        let searchTextRegexed = new RegExp(searchText, 'i');
+        let postitInfo = await PostitService.findPostit(postitId);
+        if (postitInfo) {
+            let foundComments = await Comment.find({ 'body': searchTextRegexed, 'deleted': false })
+                .populate('user_id')
+                .limit(10)
+                .skip(pagination)
+                .sort({ 'createdAt': 'desc' });
+            if (foundComments) {
+                return foundComments;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+
     }
 
     async getDeletedPostitComments(postitId, pagination) {
-        return { message: "It works", success: true }
+        let postitInfo = await PostitService.findPostit(postitId);
+        if (postitInfo) {
+            let foundComments = await Comment.find({ 'deleted': true, 'postit_ref_id': postitId })
+                .populate('user_id')
+                .limit(10)
+                .skip(pagination)
+                .sort({ 'createdAt': 'desc' });
+            if (foundComments) {
+                return foundComments;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 
     async getAllUserDeletedComments(userId, pagination) {
-        return { message: "It works", success: true }
+        let userInfo = await UserService.getUserWithUserId(userId);
+        if (userInfo) {
+            let foundComments = await Comment.find({ 'deleted': true, 'user_id': userId })
+                .populate('user_id')
+                .limit(10)
+                .skip(pagination)
+                .sort({ 'createdAt': 'desc' });
+            if (foundComments) {
+                return foundComments;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 
     async updateComment(commentId, body) {
-        return { message: "It works", success: true }
+        return await Comment.findOneAndUpdate({ '_id': commentId, 'deleted': false }, { 'body': body }, { new: true });
     }
 
     async deleteComment(commentId) {
-        return { message: "It works", success: true }
+        return await Comment.findOneAndUpdate({ '_id': commentId }, { 'deleted': true }, { new: true });
     }
 }
 

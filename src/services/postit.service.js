@@ -19,7 +19,8 @@ class PostItService {
 
     async getUserPostits(userId, pagination) {
         return await Postit.find({ 'user_id': userId, 'deleted': false })
-            .limit(pagination)
+            .limit(10)
+            .skip(pagination)
             .sort({ 'createdAt': 'desc' }).populate('user_id');
     }
 
@@ -30,7 +31,8 @@ class PostItService {
             return null;
         } else {
             return await Postit.find({ 'user_id': userInfo._id, 'deleted': false })
-                .limit(pagination)
+                .limit(10)
+                .skip(pagination)
                 .sort({ 'createdAt': 'desc' }).populate('user_id')
         }
     }
@@ -60,7 +62,8 @@ class PostItService {
             return null;
         } else {
             return await Postit.find({ 'user_id': userInfo._id, 'deleted': true })
-                .limit(pagination)
+                .limit(10)
+                .skip(pagination)
                 .sort({ 'createdAt': 'desc' }).populate('user_id')
         }
     }

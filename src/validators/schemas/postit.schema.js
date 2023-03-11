@@ -9,7 +9,7 @@ const createPostitSchema = joi.object({
 
 const getAllPostitsSchema = joi.object({
     pagination: joi.number()
-        .min(1)
+        .min(0)
         .required()
 });
 
@@ -19,7 +19,7 @@ const getUserDeletedPostitsSchema = joi.object({
         .required(),
 
     pagination: joi.number()
-        .min(1)
+        .min(0)
         .required()
 });
 
@@ -29,7 +29,7 @@ const getExternalUsersPostitsSchema = joi.object({
         .required(),
 
     pagination: joi.number()
-        .min(1)
+        .min(0)
         .required()
 })
 

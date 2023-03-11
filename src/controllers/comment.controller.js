@@ -118,8 +118,13 @@ class CommentController {
         try {
             const data = await commentService.getDeletedPostitComments(postitId, pagination);
 
-            res.status(201)
-                .send({ message: MESSAGES.FETCHED, success: true, data });
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Not found", success: false })
+            }
         } catch (err) {
             res
                 .status(500)
@@ -152,8 +157,13 @@ class CommentController {
         try {
             const data = await commentService.updateComment(commentId, commentUpdateBody);
 
-            res.status(201)
-                .send({ message: MESSAGES.UPDATED, success: true, data });
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.UPDATED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Comment not found", success: false })
+            }
         } catch (err) {
             res
                 .status(500)
@@ -167,9 +177,13 @@ class CommentController {
 
         try {
             const data = await commentService.deleteComment(commentId);
-
-            res.status(201)
-                .send({ message: MESSAGES.DELETED, success: true, data });
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.DELETED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Comment not found", success: false })
+            }
         } catch (err) {
             res
                 .status(500)
