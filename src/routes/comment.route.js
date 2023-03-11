@@ -1,26 +1,34 @@
 const express = require('express');
 const commentRouter = express.Router();
 const commentController = require('../controllers/comment.controller');
-const {validateBody} = require("../validators/validatorBody");
-const {validateParams} = require("../validators/validatorParams");
+const { validateBody } = require("../validators/validatorBody");
+const { validateParams } = require("../validators/validatorParams");
 const authenticateToken = require('../middlewares/auth.middleware');
 const adminAuthorization = require("../middlewares/adminPriviledges.middleware");
 
 
 const { commentIdSchema, paginationSchema, commentSchema, getCommentSchema, getAllPostitCommentsSchema, searchPostitForCommentSchema, getAllDeletedCommentsSchema, getAllUserDeletedCommentsSchema, editCommentSchema, postitIdSchema } = require("../validators/schemas/comment.schema");
 
-    
+
 // CREATE //////////////////////////////////////////////////////////////
 //Create comment
-commentRouter.post("/", [ validateBody(commentSchema), authenticateToken], commentController.comment);
+commentRouter.post("/", [validateBody(commentSchema), authenticateToken], commentController.comment);
 
 
 // READ //////////////////////////////////////////////////////////////
+//get all comments that are not deleted
+commentRouter.get("/:pagination", [validateParams(paginationSchema), authenticateToken, adminAuthorization], commentController.getAllComments);
+
+//get all deleted comments
+commentRouter.get("/deleted/:pagination", [validateParams(paginationSchema), authenticateToken, adminAuthorization], commentController.getAllDeletedComments);
+
+//Get a particular comment with its comment ID
+commentRouter.get("/single/:commentId", [validateParams(getCommentSchema), authenticateToken], commentController.getParticularComment);
+
 //Get all comments for a particular postit
 commentRouter.get("/:postitId/:pagination", [validateParams(getAllPostitCommentsSchema), authenticateToken], commentController.getAllCommentsForPostit);
 
-//Get a particular comment with its comment ID
-commentRouter.get("/comment/:commentId", [validateParams(getCommentSchema), authenticateToken], commentController.getParticularComment);
+
 
 //Use text to search for comments under a particular postit (just to practice searching) [admin]
 commentRouter.get("/search/:postitId/:pagination", [validateParams(postitIdSchema), validateParams(paginationSchema), validateBody(searchPostitForCommentSchema), authenticateToken, adminAuthorization], commentController.searchPostitComments);

@@ -7,6 +7,25 @@ class CommentController {
         res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
     };
 
+    //get all comments that are not deleted
+    async getAllComments(req, res) {
+        let pagination = req.params.pagination * 10;
+        const data = await commentService.getAllComments(pagination);
+
+        res.status(201)
+            .send({ message: MESSAGES.FETCHED, success: true, data });
+    }
+
+    //get all deleted comments
+    async getAllDeletedComments(req, res) {
+        let pagination = req.params.pagination * 10;
+
+        const data = await commentService.getAllDeletedComments(pagination);
+
+        res.status(201)
+            .send({ message: MESSAGES.FETCHED, success: true, data });
+    }
+
     //Create a comment
     async comment(req, res) {
         let commentBody = {
@@ -34,13 +53,17 @@ class CommentController {
     //Get all comments for a particular postit
     async getAllCommentsForPostit(req, res) {
         let postitId = req.params.postitId;
-        let pagination = req.params.pagination
+        let pagination = req.params.pagination * 10;
 
         try {
             const data = await commentService.getAllCommentsForPostit(postitId, pagination);
-
-            res.status(201)
-                .send({ message: MESSAGES.FETCHED, success: true, data });
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false })
+            }
         } catch (err) {
             res
                 .status(500)
@@ -55,8 +78,13 @@ class CommentController {
         try {
             const data = await commentService.getComment(commentId);
 
-            res.status(201)
-                .send({ message: MESSAGES.FETCHED, success: true, data });
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Comment not found", success: false })
+            }
         } catch (err) {
             res
                 .status(500)
@@ -67,7 +95,7 @@ class CommentController {
     //Use text to search for comments under a particular postit
     async searchPostitComments(req, res) {
         let postitId = req.params.postitId;
-        let pagination = req.params.pagination;
+        let pagination = req.params.pagination * 10;
         let searchText = req.body.searchText;
 
         try {
@@ -85,7 +113,7 @@ class CommentController {
     //Get all deleted comments under a particular postit
     async getAllDeletedCommentsForPostit(req, res) {
         let postitId = req.params.postitId;
-        let pagination = req.params.pagination;
+        let pagination = req.params.pagination * 10;
 
         try {
             const data = await commentService.getDeletedPostitComments(postitId, pagination);
@@ -102,7 +130,7 @@ class CommentController {
     //Get all comments deleted by a particular user
     async getAllUserDeletedComments(req, res) {
         let userId = req.params.userId;
-        let pagination = req.params.pagination;
+        let pagination = req.params.pagination * 10;
 
         try {
             const data = await commentService.getAllUserDeletedComments(userId, pagination);

@@ -10,17 +10,17 @@ class PostItService {
     }
 
     async findPostit(postitId){
-        return await Postit.findOne({'_id':postitId, 'deleted':false});
+        return await Postit.findOne({'_id':postitId, 'deleted':false}).populate('user_id');
     }
 
     async findDeletedPostit(postitId){
-        return await Postit.findOne({'_id':postitId, 'deleted':true});
+        return await Postit.findOne({'_id':postitId, 'deleted':true}).populate('user_id');
     }
 
     async getUserPostits(userId, pagination) {
         return await Postit.find({ 'user_id': userId, 'deleted': false })
             .limit(pagination)
-            .sort({ 'createdAt': 'desc' });
+            .sort({ 'createdAt': 'desc' }).populate('user_id');
     }
 
     async getExternalUserPostits(userHandle, pagination) {
@@ -31,12 +31,12 @@ class PostItService {
         } else {
             return await Postit.find({ 'user_id': userInfo._id, 'deleted': false })
                 .limit(pagination)
-                .sort({ 'createdAt': 'desc' })
+                .sort({ 'createdAt': 'desc' }).populate('user_id')
         }
     }
 
     async updatePostit(postitId, update) {
-        return await Postit.findOneAndUpdate({ '_id': postitId }, update, { new: true });
+        return await Postit.findOneAndUpdate({ '_id': postitId }, update, { new: true }).populate('user_id');
     }
 
     async deletePostit(postitId, loggedInUserId) {
@@ -44,7 +44,7 @@ class PostItService {
         let postInfo = await Postit.findOne({ '_id': postitId });
         if (postInfo) {
             if (loggedInUserId == postInfo.user_id) {
-                return await Postit.findOneAndUpdate({ '_id': postitId }, { 'deleted': true }, { new: true });
+                return await Postit.findOneAndUpdate({ '_id': postitId }, { 'deleted': true }, { new: true }).populate('user_id');
             } else {
                 return null;
             }
@@ -61,7 +61,7 @@ class PostItService {
         } else {
             return await Postit.find({ 'user_id': userInfo._id, 'deleted': true })
                 .limit(pagination)
-                .sort({ 'createdAt': 'desc' })
+                .sort({ 'createdAt': 'desc' }).populate('user_id')
         }
     }
 }

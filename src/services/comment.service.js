@@ -5,15 +5,29 @@ const constants = require("../constants/constants");
 const { DATABASES } = constants;
 
 class CommentService {
+    async getAllComments(pagination) {
+        return await Comment.find({ 'deleted': false }).populate('user_id')
+            .limit(pagination)
+            .sort({ 'createdAt': 'desc' })
+            .populate('postit_ref_id');
+    }
+
+    async getAllDeletedComments(pagination) {
+        return await Comment.find({ 'deleted': true }).populate('user_id')
+            .limit(pagination)
+            .sort({ 'createdAt': 'desc' })
+            .populate('postit_ref_id');
+    }
+
     async createComment(body) {
-        console.log(body);
+        // console.log(body);
         let postitId = body.postit_ref_id;
-     let postitInfo = await PostitService.findPostit('640c7b2aac99cda979f14405');
+        let postitInfo = await PostitService.findPostit(postitId);
         if (postitInfo) {
             //create the actual comment body
             let createdComment = await Comment.create(body);
             if (createdComment) {
-                return {postit: postitInfo, comment: createdComment}
+                return { postit: postitInfo, comment: createdComment }
             } else {
                 return null;
             }
@@ -23,11 +37,26 @@ class CommentService {
     }
 
     async getAllCommentsForPostit(postitId, pagination) {
-        return { message: "It works", success: true }
+
+        let postitInfo = await PostitService.findPostit(postitId);
+        if (postitInfo) {
+            //create the actual comment body
+            let allComments = await Comment.find({ 'postit_ref_id': postitId, 'deleted': false })
+                .limit(pagination)
+                .sort({ 'createdAt': 'desc' })
+                .populate('user_id');
+            if (allComments) {
+                return { postit: postitInfo, comments: allComments }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 
     async getComment(commentId) {
-        return { message: "It works", success: true }
+        return await Comment.find({ '_id': commentId, 'deleted': false }).populate('user_id').populate('postit_ref_id');
     }
 
     async searchComments(postitId, pagination, searchText) {
