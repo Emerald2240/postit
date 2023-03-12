@@ -12,7 +12,7 @@ const { commentIdSchema, paginationSchema, commentSchema, getCommentSchema, getA
 
 // CREATE //////////////////////////////////////////////////////////////
 //Create comment
-commentRouter.post("/", [validateBody(commentSchema), authenticateToken], commentController.comment);
+commentRouter.post("/:postitId", [validateParams(postitIdSchema), validateBody(commentSchema), authenticateToken], commentController.comment);
 
 
 // READ //////////////////////////////////////////////////////////////

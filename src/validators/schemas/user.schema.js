@@ -55,4 +55,10 @@ const emailSchema = joi.object({
         .required(),
 });
 
-module.exports = { signUpSchema, emailSchema, updateUserSchema };
+const userIdSchema = joi.object({
+    userId: joi.string()
+    .min(24)
+    .required()
+});
+
+module.exports = { signUpSchema, emailSchema, userIdSchema, updateUserSchema };

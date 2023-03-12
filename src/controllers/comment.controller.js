@@ -30,7 +30,7 @@ class CommentController {
     async comment(req, res) {
         let commentBody = {
             user_id: req.user._id,
-            postit_ref_id: req.body.postitId,
+            postit_ref_id: req.params.postitId,
             body: req.body.body
         }
 

@@ -7,3 +7,8 @@ dont forget to readd auth to getAllUsers and getAllDeletedusers routes when your
 Remove sensitive comment data in the createComment function
 ensure users cannot edit or touch postits they did not create
 update postman documentation to account new populate function added to code
+remove unneeded values from the responses(__v)
+update user profile picture once they update their profile (most probably anything at all)
+a deleted user is still able to login. FIX THIS IMMEDIATELY!!!
+add documentation for regular users trying to do admin level tasks
+ensure only resource owners can delete or update
