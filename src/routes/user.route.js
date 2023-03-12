@@ -35,4 +35,9 @@ userRouter.patch("/", [validateBody(updateUserSchema), authenticateToken], userC
 //Delete user account
 userRouter.delete("/", [authenticateToken], userController.deleteUserAccount);
 
+//documentation redirect
+userRouter.get("/docs", (req, res) => {
+    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioa');
+});
+
 module.exports = userRouter;

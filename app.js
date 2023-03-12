@@ -18,6 +18,17 @@ const jsonParserMiddleware = require('./src/middlewares/jsonParser.middleware');
 //Prevent app from crashing due to bad json request
 app.use(jsonParserMiddleware);
 
+//default route
+app.get("/", (req, res) => {
+    res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
+});
+
+//documentation redirect
+app.get("/docs", (req, res) => {
+    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioY');
+});
+
+
 //All requests of all types are pushed to this route to be handled
 app.use('/api/v1', rootRoute);
 

@@ -16,4 +16,9 @@ router.use("/auth", authRoute);
 router.use("/postit", postitRoute);
 router.use("/comment", commentRoute);
 
+//documentation redirect
+router.get("/docs", (req, res) => {
+    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioY');
+});
+
 module.exports = router;
