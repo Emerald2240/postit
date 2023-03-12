@@ -1,5 +1,5 @@
 {
-  "name": "Postit Social Media API",
+  "name": "Postit_Social_Media_API",
   "version": "1.0.0",
   "description": "This is a twitter like social media app. Users can login, post content and comment.",
   "main": "app.js",
