@@ -15,4 +15,9 @@ authRouter.post("/login", validateBody(loginSchema), authController.login);
 
 authRouter.delete("/logout", authController.logout);
 
+//documentation redirect
+authRouter.get("/docs", (req, res) => {
+    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioY');
+});
+
 module.exports = authRouter;

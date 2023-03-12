@@ -49,5 +49,9 @@ commentRouter.patch("/:commentId", [validateParams(commentIdSchema), validateBod
 //Delete a particular comment
 commentRouter.delete("/:commentId", [validateParams(commentIdSchema), authenticateToken], commentController.deleteComment);
 
+//documentation redirect
+commentRouter.get("/docs", (req, res) => {
+    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioZ');
+});
 
 module.exports = commentRouter;
