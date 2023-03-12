@@ -22,18 +22,14 @@ postitRouter.get("/single/:postitId", [validateParams(postitIdSchema), authentic
 //Find a particular deleted postit using its postitid [admin]
 postitRouter.get("/single-deleted/:postitId", [validateParams(postitIdSchema), authenticateToken, adminAuthorization], postitController.getSingleDeletedPostit);
 
+//Get all postits deleted softly by user [admin]     
+postitRouter.get("/deleted/:userHandle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
 
 //Update postit by its Id
 postitRouter.patch("/:postitId", [validateParams(postitIdSchema), validateBody(updatePostitSchema), authenticateToken], postitController.updatePostit);
 
 //Soft Delete postit
 postitRouter.delete("/:postitId", [validateParams(postitIdSchema), authenticateToken], postitController.deletePostit);
-
-
-/////////////// ADMIN /////////////////////////////////
-
-//Get all postits deleted softly by user [admin]     
-postitRouter.get("/deleted/:userHandle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
 
 
 module.exports = postitRouter;

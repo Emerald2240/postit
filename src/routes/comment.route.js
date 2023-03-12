@@ -32,7 +32,6 @@ commentRouter.get("/:postitId/:pagination", [validateParams(getAllPostitComments
 commentRouter.get("/search/:postitId/:pagination", [validateParams(searchPostitForCommentSchemaParam), validateBody(searchPostitForCommentSchema), authenticateToken, adminAuthorization], commentController.searchPostitComments);
 
 
-
 //Get all deleted comments under a particular postit [admin]
 commentRouter.get("/postit-deleted/:postitId/:pagination", [validateParams(getAllDeletedCommentsSchema), authenticateToken, adminAuthorization], commentController.getAllDeletedCommentsForPostit);
 

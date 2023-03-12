@@ -4,7 +4,6 @@ const constants = require("../constants/constants");
 const { MESSAGES } = constants;
 const authController = require("../controllers/auth.controller");
 const { validateBody } = require("../validators/validatorBody");
-const { validateParams } = require("../validators/validatorParams");
 const { loginSchema, refreshTokenSchema } = require("../validators/schemas/auth.schema");
 
 authRouter.get("/", (req, res) => {
