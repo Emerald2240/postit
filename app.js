@@ -5,6 +5,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
+const constants = require('./src/constants/constants');
+const {MESSAGES} = constants;
 const database = require("./src/database/database");
 const rootRoute = require("./src/routes/index.route");
 const app = express();

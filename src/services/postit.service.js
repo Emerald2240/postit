@@ -12,29 +12,39 @@ class PostItService {
         return await Postit.find({ 'deleted': false })
             .limit(10)
             .skip(pagination)
-            .sort({ 'createdAt': 'desc' }).populate('user_id');
+            .sort({ 'createdAt': 'desc' })
+            .populate('user_id')
+            .select('-__v ');
     }
 
     async getAllDeletedPostits(pagination) {
         return await Postit.find({ 'deleted': true })
             .limit(10)
             .skip(pagination)
-            .sort({ 'createdAt': 'desc' }).populate('user_id');
+            .sort({ 'createdAt': 'desc' })
+            .populate('user_id')
+            .select('-__v ');
     }
 
     async findPostit(postitId) {
-        return await Postit.findOne({ '_id': postitId, 'deleted': false }).populate('user_id');
+        return await Postit.findOne({ '_id': postitId, 'deleted': false })
+            .populate('user_id')
+            .select('-__v ');
     }
 
     async findDeletedPostit(postitId) {
-        return await Postit.findOne({ '_id': postitId, 'deleted': true }).populate('user_id');
+        return await Postit.findOne({ '_id': postitId, 'deleted': true })
+            .populate('user_id')
+            .select('-__v ');
     }
 
     async getUserPostits(userId, pagination) {
         return await Postit.find({ 'user_id': userId, 'deleted': false })
             .limit(10)
             .skip(pagination)
-            .sort({ 'createdAt': 'desc' }).populate('user_id');
+            .sort({ 'createdAt': 'desc' })
+            .populate('user_id')
+            .select('-__v ');
     }
 
     async getExternalUserPostits(userHandle, pagination) {
@@ -46,12 +56,16 @@ class PostItService {
             return await Postit.find({ 'user_id': userInfo._id, 'deleted': false })
                 .limit(10)
                 .skip(pagination)
-                .sort({ 'createdAt': 'desc' }).populate('user_id')
+                .sort({ 'createdAt': 'desc' })
+                .populate('user_id')
+                .select('-__v ');
         }
     }
 
     async updatePostit(postitId, update, userId) {
-        return await Postit.findOneAndUpdate({ '_id': postitId, 'user_id': userId }, update, { new: true }).populate('user_id');
+        return await Postit.findOneAndUpdate({ '_id': postitId, 'user_id': userId }, update, { new: true })
+            .populate('user_id')
+            .select('-__v ');
     }
 
     async deletePostit(postitId, loggedInUserId) {
@@ -59,7 +73,9 @@ class PostItService {
         let postInfo = await Postit.findOne({ '_id': postitId });
         if (postInfo) {
             if (loggedInUserId == postInfo.user_id) {
-                return await Postit.findOneAndUpdate({ '_id': postitId }, { 'deleted': true }, { new: true }).populate('user_id');
+                return await Postit.findOneAndUpdate({ '_id': postitId }, { 'deleted': true }, { new: true })
+                    .populate('user_id')
+                    .select('-__v ');
             } else {
                 return null;
             }
@@ -77,7 +93,9 @@ class PostItService {
             return await Postit.find({ 'user_id': userInfo._id, 'deleted': true })
                 .limit(10)
                 .skip(pagination)
-                .sort({ 'createdAt': 'desc' }).populate('user_id')
+                .sort({ 'createdAt': 'desc' })
+                .populate('user_id')
+                .select('-__v ');
         }
     }
 }

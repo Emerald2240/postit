@@ -9,6 +9,10 @@ const adminAuthorization = require("../middlewares/adminPriviledges.middleware")
 
 const { commentIdSchema, paginationSchema, commentSchema, getCommentSchema, getAllPostitCommentsSchema, searchPostitForCommentSchema, searchPostitForCommentSchemaParam, getAllDeletedCommentsSchema, getAllUserDeletedCommentsSchema, editCommentSchema, postitIdSchema } = require("../validators/schemas/comment.schema");
 
+//documentation redirect
+commentRouter.get("/docs", (req, res) => {
+    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioZ');
+});
 
 // CREATE //////////////////////////////////////////////////////////////
 //Create comment
@@ -16,10 +20,10 @@ commentRouter.post("/:postitId", [validateParams(postitIdSchema), validateBody(c
 
 
 // READ //////////////////////////////////////////////////////////////
-//get all comments that are not deleted
+//get all comments that are not deleted [admin]
 commentRouter.get("/:pagination", [validateParams(paginationSchema), authenticateToken, adminAuthorization], commentController.getAllComments);
 
-//get all deleted comments
+//get all deleted comments [admin]
 commentRouter.get("/deleted/:pagination", [validateParams(paginationSchema), authenticateToken, adminAuthorization], commentController.getAllDeletedComments);
 
 //Get a particular comment with its comment ID
@@ -49,9 +53,5 @@ commentRouter.patch("/:commentId", [validateParams(commentIdSchema), validateBod
 //Delete a particular comment
 commentRouter.delete("/:commentId", [validateParams(commentIdSchema), authenticateToken], commentController.deleteComment);
 
-//documentation redirect
-commentRouter.get("/docs", (req, res) => {
-    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioZ');
-});
 
 module.exports = commentRouter;

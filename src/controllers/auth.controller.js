@@ -29,7 +29,7 @@ class AuthController {
                     } else {
 
                         //create a new access token
-                        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1000m' });//Temporary time limit
+                        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '720m' });//12 hours
                         res.json({ accessToken: accessToken });
                     }
                 })
@@ -47,7 +47,7 @@ class AuthController {
             if (user) {
 
                 //creates new access token and refresh token for the user
-                const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1000m' });
+                const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '720m' });//12 hours
                 const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
                 refreshTokenStore = refreshToken;
                 res.status(200)
