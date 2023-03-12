@@ -2,10 +2,13 @@ const constants = {
     DATABASE_URI: process.env.DATABASE_URI,
 
     DATABASES: {
-        
+        POSTIT: "postit",
+        COMMENT: "comment",
+        USER: "user"
     },
     USER_TYPES: {
-       
+        USER: "user",
+        ADMIN: "admin"
     },
     MESSAGES: {
         FETCHED: "Resource fetched successfully",
@@ -18,8 +21,8 @@ const constants = {
         AUTH_DEFAULT: "",
         LOGOUT: "Successfully logged out! Have a nice day.",
         LOGIN_FIRST: "Error! Login first",
-        LOGGED_IN:"Successfully logged in",
-        LOGIN_FAILURE:"Unable to login. Username or password incorrect"
+        LOGGED_IN: "Successfully logged in",
+        LOGIN_FAILURE: "Unable to login. Username or password incorrect"
     }
 };
 
