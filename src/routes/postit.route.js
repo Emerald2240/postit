@@ -10,23 +10,32 @@ const { createPostitSchema, getAllPostitsSchema, getUserDeletedPostitsSchema, ge
 //Create Postit   
 postitRouter.post("/", [validateBody(createPostitSchema), authenticateToken], postitController.createPostit);
 
+//Get all postits [admin]
+postitRouter.get("/all/:pagination", [validateParams(getAllPostitsSchema), authenticateToken, adminAuthorization], postitController.getAllPostits);
+
+//Get all deleted postits [admin]
+postitRouter.get("/all-deleted/:pagination", [validateParams(getAllPostitsSchema), authenticateToken, adminAuthorization], postitController.getAllDeletedPostits);
+
 //Get all postits created by logged in user
 postitRouter.get("/:pagination", [validateParams(getAllPostitsSchema), authenticateToken], postitController.getUserPostits);
 
 //Get postits created by an external user handle
 postitRouter.get("/external/:userHandle/:pagination", [validateParams(getExternalUsersPostitsSchema), authenticateToken, adminAuthorization], postitController.getExternalUserPostits);
 
+//Find a particular postit using its postitid
+postitRouter.get("/single/:postitId", [validateParams(postitIdSchema), authenticateToken, adminAuthorization], postitController.getSinglePostit);
+
+//Find a particular deleted postit using its postitid [admin]
+postitRouter.get("/single-deleted/:postitId", [validateParams(postitIdSchema), authenticateToken, adminAuthorization], postitController.getSingleDeletedPostit);
+
+//Get all postits deleted softly by user [admin]     
+postitRouter.get("/deleted/:userHandle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
+
 //Update postit by its Id
 postitRouter.patch("/:postitId", [validateParams(postitIdSchema), validateBody(updatePostitSchema), authenticateToken], postitController.updatePostit);
 
 //Soft Delete postit
 postitRouter.delete("/:postitId", [validateParams(postitIdSchema), authenticateToken], postitController.deletePostit);
-
-
-/////////////// ADMIN /////////////////////////////////
-
-//Get all postits deleted softly by user [admin]     
-postitRouter.get("/deleted/:userHandle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
 
 
 module.exports = postitRouter;

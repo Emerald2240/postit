@@ -16,6 +16,86 @@ class PostitController {
         }
     }
 
+    async getAllPostits(req, res){
+        try {
+            let pagination = req.params.pagination * 10;
+            const data = await postitService.getAllPostits(pagination);
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false });
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+    }
+    
+
+    async getAllDeletedPostits(req, res){
+        try {
+            let pagination = req.params.pagination * 10;
+            const data = await postitService.getAllDeletedPostits(pagination);
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false });
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+    }
+    
+
+    async getSinglePostit(req, res) {
+        let postitId = req.params.postitId;
+
+        try {
+            const data = await postitService.findPostit(postitId);
+
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false })
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+
+    }
+
+    async getSingleDeletedPostit(req, res) {
+        let postitId = req.params.postitId;
+
+        try {
+            const data = await postitService.findDeletedPostit(postitId);
+
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false })
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+
+    }
+
     async getUserPostits(req, res) {
         try {
             let userId = req.user._id;
@@ -46,7 +126,7 @@ class PostitController {
                     .send({ message: MESSAGES.FETCHED, success: true, data });
             } else {
                 res.status(404)
-                    .send({ message: "Postit not found", success: false });
+                    .send({ message: "User not found", success: false });
             }
         } catch (err) {
             res
@@ -58,8 +138,10 @@ class PostitController {
     async updatePostit(req, res) {
         try {
             let postitId = req.params.postitId;
-            let update = req.body
-            const data = await postitService.updatePostit(postitId, update);
+            let update = req.body;
+            let userId = req.user._id;
+
+            const data = await postitService.updatePostit(postitId, update, userId);
             if (data) {
                 res.status(201)
                     .send({ message: MESSAGES.UPDATED, success: true, data });
@@ -86,7 +168,7 @@ class PostitController {
                     .send({ message: MESSAGES.DELETED, success: true, data });
             } else {
                 res.status(404)
-                    .send({ message: "Postit doesnt exist", success: false })
+                    .send({ message: "Postit not found", success: false })
             }
 
         } catch (err) {
@@ -106,13 +188,14 @@ class PostitController {
                     .send({ message: MESSAGES.FETCHED, success: true, data });
             } else {
                 res.status(404)
-                    .send({ message: "Postit not found", success: false});
+                    .send({ message: "User not found", success: false });
             }
         } catch (err) {
             res
                 .status(500)
                 .send({ message: err.message || MESSAGES.ERROR, success: false });
-        }    }
+        }
+    }
 
 }
 

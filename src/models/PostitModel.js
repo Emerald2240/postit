@@ -5,7 +5,7 @@ const { USER_TYPES, DATABASES } = constants;
 const PostitSchema = new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
-        ref: DATABASES.POSTIT,
+        ref: DATABASES.USER,
         required: true
     },
     body: {

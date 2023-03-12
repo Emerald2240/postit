@@ -4,7 +4,7 @@ const constants = require("../constants/constants");
 function database() {
     console.log("connecting to DB...")
     mongoose
-    .set('strictQuery', true)
+        .set('strictQuery', true)
         .connect(constants.DATABASE_URI, {
             // useCreateIndex:true,
             // useNewUrlParser:true,

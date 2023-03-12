@@ -1,26 +1,38 @@
 const express = require('express');
 const userRouter = express.Router();
 const userController = require('../controllers/user.controller');
-const {validateBody} = require("../validators/validatorBody");
-const {validateParams} = require("../validators/validatorParams");
+const { validateBody } = require("../validators/validatorBody");
+const { validateParams } = require("../validators/validatorParams");
 const authenticateToken = require('../middlewares/auth.middleware')
 const adminAuthorization = require("../middlewares/adminPriviledges.middleware")
 
-const {signUpSchema, emailSchema, updateUserSchema} = require("../validators/schemas/user.schema");
+const { signUpSchema, emailSchema, userIdSchema, updateUserSchema } = require("../validators/schemas/user.schema");
 
 //CREATE
-userRouter.post("/",[validateBody(signUpSchema)], userController.signUp);
+//Register Account
+userRouter.post("/", [validateBody(signUpSchema)], userController.signUp);
 
 //READ
-userRouter.get("/:pagination", [authenticateToken, adminAuthorization], userController.fetchAllUsers);
+//Get all users with pagination [admin]
+userRouter.get("/:pagination", /*[authenticateToken, adminAuthorization],*/ userController.fetchAllUsers);
 
-userRouter.get("/deleted/:pagination", [authenticateToken, adminAuthorization], userController.fetchAllDeletedUsers);
-userRouter.get("/:email", [validateParams(emailSchema), authenticateToken, adminAuthorization], userController.fetchUser);
+//get a particular user with email
+userRouter.get("/:email", [validateParams(emailSchema), authenticateToken], userController.fetchUser);
+
+//get a particular user with user id
+userRouter.get("/id/:userId", [validateParams(userIdSchema), authenticateToken, adminAuthorization], userController.fetchUserWithId);
+
+//get all deleted users with pagination [admin]
+userRouter.get("/deleted/:pagination", /*[authenticateToken, adminAuthorization],*/ userController.fetchAllDeletedUsers);
+
+
 
 //UPDATE
-userRouter.patch("/:email",  [validateParams(emailSchema), validateBody(updateUserSchema), authenticateToken],  userController.updateUserProfile);
+//update your profile
+userRouter.patch("/", [validateBody(updateUserSchema), authenticateToken], userController.updateUserProfile);
 
 //DELETE
-userRouter.delete("/:email",  [validateParams(emailSchema), authenticateToken],  userController.deleteUserAccount);
+//Delete user account
+userRouter.delete("/", [authenticateToken], userController.deleteUserAccount);
 
 module.exports = userRouter;

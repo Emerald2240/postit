@@ -15,8 +15,8 @@ const loginSchema = joi.object({
 
 const refreshTokenSchema = joi.object({
     token: joi.string()
-    .min(50)
-    .required()
+        .min(50)
+        .required()
 });
 
 module.exports = { loginSchema, refreshTokenSchema };

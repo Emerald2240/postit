@@ -1,6 +1,6 @@
-const { model, Schema, SchemaType } = require("mongoose");
+const { model, Schema } = require("mongoose");
 const constants = require("../constants/constants");
-const { USER_TYPES, DATABASES } = constants;
+const { DATABASES } = constants;
 
 const CommentSchema = new Schema({
     user_id: {
@@ -8,16 +8,17 @@ const CommentSchema = new Schema({
         ref: DATABASES.USER,
         required: true
     },
-    postit_ref_id:{
+    postit_ref_id: {
         type: Schema.Types.ObjectId,
-        ref: DATABASES.POSTIT
+        ref: DATABASES.POSTIT,
+        required: true
     },
     body: {
         type: String,
         required: true
     },
-    deleted:{
-        type:Boolean,
+    deleted: {
+        type: Boolean,
         default: false,
         select: false
     }
@@ -27,5 +28,5 @@ const CommentSchema = new Schema({
     }
 );
 
-const Room = model(DATABASES.ROOM, RoomSchema);
-module.exports = Room;
+const Comment = model(DATABASES.COMMENT, CommentSchema);
+module.exports = Comment;
