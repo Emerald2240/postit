@@ -17,10 +17,10 @@ router.get("/docs", (req, res) => {
     res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioY');
 });
 
-router.use("/user", userRoute);
+router.use("/users", userRoute);
 router.use("/auth", authRoute);
-router.use("/postit", postitRoute);
-router.use("/comment", commentRoute);
+router.use("/postits", postitRoute);
+router.use("/comments", commentRoute);
 
 
 module.exports = router;

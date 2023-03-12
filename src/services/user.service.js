@@ -1,5 +1,6 @@
 const User = require("../models/UserModel");
 const bcryptEncrypter = require("bcrypt");
+const wrapAvatar = require("../utils/avatarUrlTagWrapper");
 
 class UserService {
 
@@ -15,6 +16,22 @@ class UserService {
 
         user.password = hashedPassword;
 
+        //Checks for a user with either the email or the handle, if it finds a match, it returns an error
+        let userCheck = await User.findOne()
+            .and([
+                {
+                    $or: [
+                        { 'email': user.email },
+                        { 'handle': user.handle },
+                    ]
+                }
+            ]);
+
+        if (userCheck._id) {
+            return { error: 'Email or Handle already exists' }
+        }
+
+        //Create user
         let createdUser = await User.create(user);
         return ({
             _id: createdUser._id,
@@ -42,7 +59,6 @@ class UserService {
             .select('-__v ');
     }
 
-
     //Returns everything, whether deleted or undeleted
     async getUserWithUserIdUltimate(userId) {
         return await User.findOne({ '_id': userId })
@@ -66,7 +82,6 @@ class UserService {
             .sort({ 'createdAt': 'desc' })
             .select('-__v ');
     }
-
 
     async updateUserByEmail(email, data) {
 
