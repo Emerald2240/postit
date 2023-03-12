@@ -1,6 +1,4 @@
 refresh tokens shouldnt be passed in the body. postman is complaining
-remove unneeded values from the responses(__v)
-update user profile picture once they update their profile (most probably anything at all)
 a deleted user is still able to login. FIX THIS IMMEDIATELY!!!
 add documentation for regular users trying to do admin level tasks
 ensure only resource owners can delete or update
