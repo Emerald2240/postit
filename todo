@@ -1,2 +1,5 @@
 refresh tokens shouldnt be passed in the body. postman is complaining
 rewrite documentation and set it to live server(localhost to justpostit.render.com)
+update database model
+type readme
+pray to God it all ends well.
