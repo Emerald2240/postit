@@ -1,6 +1,8 @@
 const userService = require('../services/user.service');
 const constants = require("../constants/constants");
 const { generateRandomAvatar } = require("../vendors/dicebar");
+const wrapAvatar = require("../utils/avatarUrlTagWrapper");
+
 
 const { MESSAGES } = constants;
 
@@ -14,7 +16,12 @@ class UserController {
     async signUp(req, res) {
 
         try {
+            //Generate avatar url
             req.body.avatar = await generateRandomAvatar(req.body.email);
+
+            //Wrap avatar url in img tag to help frontend devs
+            req.body.avatar_wrapped = wrapAvatar(req.body.avatar, req.body.handle);
+
             const data = await userService.createUser(req.body);
             res
                 .status(201)
@@ -115,7 +122,12 @@ class UserController {
     //Update/edit user data
     async updateUserProfile(req, res) {
         try {
+            //Generate new avatar
             req.body.avatar = await generateRandomAvatar(req.user.email);
+
+            //Wrap new avatar url in img tag to help frontend devs
+            req.body.avatar_wrapped = wrapAvatar(req.body.avatar, req.body.handle);
+
             const data = await userService.updateUserByEmail(req.user.email, req.body);
 
             if (data) {
