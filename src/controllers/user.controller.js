@@ -44,26 +44,26 @@ class UserController {
         }
     }
 
-        //get user from the database, using their email
-        async fetchUserWithId(req, res) {
-            try {
-                const data = await userService.getUserWithUserId(req.params.userId);
-    
-                if (data) {
-                    res
-                        .status(200)
-                        .send({ message: MESSAGES.FETCHED, success: true, data });
-                } else {
-                    res
-                        .status(404)
-                        .send({ message: MESSAGES.NOT_FOUND, success: false, data });
-                }
-            } catch (err) {
+    //get user from the database, using their email
+    async fetchUserWithId(req, res) {
+        try {
+            const data = await userService.getUserWithUserId(req.params.userId);
+
+            if (data) {
                 res
-                    .status(500)
-                    .send({ message: err.message || MESSAGES.ERROR, success: false });
+                    .status(200)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res
+                    .status(404)
+                    .send({ message: MESSAGES.NOT_FOUND, success: false, data });
             }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
         }
+    }
 
     //get all users in the user collection/table
     async fetchAllUsers(req, res) {

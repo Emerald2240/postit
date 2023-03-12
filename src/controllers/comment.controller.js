@@ -101,8 +101,13 @@ class CommentController {
         try {
             const data = await commentService.searchComments(postitId, pagination, searchText);
 
-            res.status(201)
-                .send({ message: MESSAGES.FETCHED, success: true, data });
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false })
+            }
         } catch (err) {
             res
                 .status(500)
@@ -139,9 +144,13 @@ class CommentController {
 
         try {
             const data = await commentService.getAllUserDeletedComments(userId, pagination);
-
-            res.status(201)
-                .send({ message: MESSAGES.FETCHED, success: true, data });
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "User Not found", success: false })
+            }
         } catch (err) {
             res
                 .status(500)

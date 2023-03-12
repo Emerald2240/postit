@@ -43,6 +43,12 @@ class UserService {
         return await User.findOne({ '_id': userId, 'deleted': false });
     }
 
+
+    //Returns everything, whether deleted or undeleted
+    async getUserWithUserIdUltimate(userId) {
+        return await User.findOne({ '_id': userId});
+    }
+
     async getAllUsers(pagination) {
         return await User.find({ 'deleted': false })
             .limit(10)

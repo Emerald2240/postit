@@ -126,7 +126,7 @@ class PostitController {
                     .send({ message: MESSAGES.FETCHED, success: true, data });
             } else {
                 res.status(404)
-                    .send({ message: "Postit not found", success: false });
+                    .send({ message: "User not found", success: false });
             }
         } catch (err) {
             res
@@ -168,7 +168,7 @@ class PostitController {
                     .send({ message: MESSAGES.DELETED, success: true, data });
             } else {
                 res.status(404)
-                    .send({ message: "Postit doesnt exist", success: false })
+                    .send({ message: "Postit not found", success: false })
             }
 
         } catch (err) {
@@ -188,7 +188,7 @@ class PostitController {
                     .send({ message: MESSAGES.FETCHED, success: true, data });
             } else {
                 res.status(404)
-                    .send({ message: "Postit not found", success: false });
+                    .send({ message: "User not found", success: false });
             }
         } catch (err) {
             res

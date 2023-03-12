@@ -13,17 +13,18 @@ const { signUpSchema, emailSchema, userIdSchema, updateUserSchema } = require(".
 userRouter.post("/", [validateBody(signUpSchema)], userController.signUp);
 
 //READ
+//Get all users with pagination [admin]
+userRouter.get("/:pagination", /*[authenticateToken, adminAuthorization],*/ userController.fetchAllUsers);
+
 //get a particular user with email
 userRouter.get("/:email", [validateParams(emailSchema), authenticateToken], userController.fetchUser);
 
 //get a particular user with user id
 userRouter.get("/id/:userId", [validateParams(userIdSchema), authenticateToken, adminAuthorization], userController.fetchUserWithId);
 
-//Get all users with pagination [admin]
-userRouter.get("/:pagination", /*[authenticateToken, adminAuthorization],*/ userController.fetchAllUsers);
-
 //get all deleted users with pagination [admin]
 userRouter.get("/deleted/:pagination", /*[authenticateToken, adminAuthorization],*/ userController.fetchAllDeletedUsers);
+
 
 
 //UPDATE

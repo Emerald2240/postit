@@ -99,7 +99,7 @@ class CommentService {
     }
 
     async getAllUserDeletedComments(userId, pagination) {
-        let userInfo = await UserService.getUserWithUserId(userId);
+        let userInfo = await UserService.getUserWithUserIdUltimate(userId);
         if (userInfo) {
             let foundComments = await Comment.find({ 'deleted': true, 'user_id': userId })
                 .populate('user_id')
