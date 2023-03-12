@@ -1,5 +1,5 @@
 # postit
-## Live Server: https://postit.onrender.com
+## Live Server: https://justpostit.onrender.com
 
 ## Database model: https://dbdesigner.page.link/eqmiCimxeioSnwvA8
 
