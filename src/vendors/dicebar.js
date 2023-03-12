@@ -29,8 +29,8 @@ const avatarStyles = [
 
 
 const getRandomAvatarStyle = () => {
+  
   // Your code here
-
   const random = Math.floor(Math.random() * avatarStyles.length);
   return avatarStyles[random];
 }
@@ -45,33 +45,33 @@ const generateRandomAvatar = async (email) => {
 
   const isValidEmail = emailRegex.test(_email);
   if (!isValidEmail) {
-   throw new Error('Invalid email')
- }
+    throw new Error('Invalid email')
+  }
 
 
- const entropySource = () => Math.random().toString(36).substring(2,7);
+  const entropySource = () => Math.random().toString(36).substring(2, 7);
 
 
- const replaceAt = `-${entropySource()}-`
- const replaceDot = `-${entropySource()}-`
+  const replaceAt = `-${entropySource()}-`
+  const replaceDot = `-${entropySource()}-`
 
 
- const seed = _email.replace('@', replaceAt).replace(/\./g, replaceDot);
+  const seed = _email.replace('@', replaceAt).replace(/\./g, replaceDot);
 
 
- const randomAvatarStyle = getRandomAvatarStyle();
+  const randomAvatarStyle = getRandomAvatarStyle();
 
 
- if (!randomAvatarStyle || !avatarStyles.includes(randomAvatarStyle)) {
-   // console.error('Invalid avatar style') // log this error to the console
-   throw new Error('Something failed: ')
- }
+  if (!randomAvatarStyle || !avatarStyles.includes(randomAvatarStyle)) {
+    // console.error('Invalid avatar style') // log this error to the console
+    throw new Error('Something failed: ')
+  }
 
 
- const avatarUrl = `https://api.dicebear.com/5.x/${randomAvatarStyle}/svg?seed=${seed}&size=200&radius=50`;
+  const avatarUrl = `https://api.dicebear.com/5.x/${randomAvatarStyle}/svg?seed=${seed}&size=200&radius=50`;
 
 
- return avatarUrl;
+  return avatarUrl;
 }
 // @_learnable
 

@@ -1,6 +1,5 @@
 const User = require("../models/UserModel");
 const bcryptEncrypter = require("bcrypt");
-const { generateRandomAvatar } = require("../vendors/dicebar");
 
 class UserService {
 
@@ -15,8 +14,6 @@ class UserService {
         const hashedPassword = await bcryptEncrypter.hash(originalPassword, salt);
 
         user.password = hashedPassword;
-
-        user.avatar = await generateRandomAvatar(user.email);
 
         let createdUser = await User.create(user);
         return ({
@@ -37,19 +34,19 @@ class UserService {
         let emailRegexed = new RegExp(email, 'i');
 
         return await User.findOne({ 'email': emailRegexed, 'deleted': false })
-        .select('-__v ');
+            .select('-__v ');
     }
 
     async getUserWithUserId(userId) {
         return await User.findOne({ '_id': userId, 'deleted': false })
-        .select('-__v ');
+            .select('-__v ');
     }
 
 
     //Returns everything, whether deleted or undeleted
     async getUserWithUserIdUltimate(userId) {
-        return await User.findOne({ '_id': userId})
-        .select('-__v ');
+        return await User.findOne({ '_id': userId })
+            .select('-__v ');
     }
 
     async getAllUsers(pagination) {
@@ -68,7 +65,6 @@ class UserService {
             .skip(pagination)
             .sort({ 'createdAt': 'desc' })
             .select('-__v ');
-
     }
 
 
@@ -76,14 +72,14 @@ class UserService {
 
         //makes email case insensitive
         let emailRegexed = new RegExp(email, 'i');
+
         return await User.findOneAndUpdate({ 'email': emailRegexed }, data, { new: true })
-        .select('-__v ');
+            .select('-__v ');
     }
 
     async deleteUser(email) {
-        // return await User.findOneAndDelete({ email: email });
         return await User.findOneAndUpdate({ 'email': email }, { 'deleted': true }, { new: true })
-        .select('-__v ');;
+            .select('-__v ');;
     }
 }
 
