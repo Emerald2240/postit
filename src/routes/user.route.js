@@ -28,7 +28,7 @@ userRouter.get("/:email", [validateParams(emailSchema), authenticateToken], user
 userRouter.get("/id/:userId", [validateParams(userIdSchema), authenticateToken], userController.fetchUserWithId);
 
 //get all deleted users with pagination [admin]
-userRouter.get("/deleted/:pagination", [authenticateToken], userController.fetchAllDeletedUsers);
+userRouter.get("/deleted/:pagination", [authenticateToken, adminAuthorization], userController.fetchAllDeletedUsers);
 
 
 //UPDATE
