@@ -7,7 +7,6 @@ const wrapAvatar = require("../utils/avatarUrlTagWrapper");
 const { MESSAGES } = constants;
 
 class UserController {
-
     async getStatus(req, res) {
         res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
     };

@@ -1,5 +1,6 @@
 const User = require("../models/UserModel");
 const bcryptEncrypter = require("bcrypt");
+const wrapAvatar = require("../utils/avatarUrlTagWrapper");
 
 class UserService {
 
@@ -58,7 +59,6 @@ class UserService {
             .select('-__v ');
     }
 
-
     //Returns everything, whether deleted or undeleted
     async getUserWithUserIdUltimate(userId) {
         return await User.findOne({ '_id': userId })
@@ -82,7 +82,6 @@ class UserService {
             .sort({ 'createdAt': 'desc' })
             .select('-__v ');
     }
-
 
     async updateUserByEmail(email, data) {
 

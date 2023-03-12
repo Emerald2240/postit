@@ -1,10 +1,49 @@
 const Comment = require("../models/CommentModel");
+const Postit = require("../models/PostitModel");
 const UserService = require("../services/user.service");
 const PostitService = require("./postit.service");
 
 class CommentService {
     async getAllComments(pagination) {
         return await Comment.find({ 'deleted': false })
+            .populate('user_id')
+            .limit(10)
+            .skip(pagination)
+            .sort({ 'createdAt': 'desc' })
+            .populate('postit_ref_id')
+            .select('-__v ');
+    }
+
+    async getCommentUnderPostit(postitId, commentId) {
+        let postitInfo = await PostitService.findPostit(postitId);
+        if (postitInfo) {
+            let foundComment = await Comment.findOne({ '_id': commentId, 'deleted': false })
+                .populate('user_id')
+                .select('-__v ');
+            if (foundComment) {
+                return { postit: postitInfo, comment: foundComment }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    async getCommentUnderPostitUnderUser(userId, postitId, commentId) {
+        let postitCheck = await Postit.findOne({ '_id': postitId, 'user_id': userId, 'deleted': false });
+        if (postitCheck) {
+            return await Comment.findOne({ 'user_id': userId, 'postit_ref_id': postitId, '_id': commentId, 'deleted': false })
+                .populate('user_id')
+                .populate('postit_ref_id')
+                .select('-__v ');
+        } else {
+            return null
+        }
+    }
+
+    async getAllCommentsUnderUser(userId, pagination) {
+        return await Comment.find({ 'user_id': userId, 'deleted': false })
             .populate('user_id')
             .limit(10)
             .skip(pagination)
