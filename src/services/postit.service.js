@@ -8,6 +8,20 @@ class PostItService {
         return await Postit.create(postit);
     }
 
+    async getAllPostits(pagination) {
+        return await Postit.find({ 'deleted': false })
+            .limit(10)
+            .skip(pagination)
+            .sort({ 'createdAt': 'desc' }).populate('user_id');
+    }
+
+    async getAllDeletedPostits(pagination) {
+        return await Postit.find({ 'deleted': true })
+            .limit(10)
+            .skip(pagination)
+            .sort({ 'createdAt': 'desc' }).populate('user_id');
+    }
+
     async findPostit(postitId) {
         return await Postit.findOne({ '_id': postitId, 'deleted': false }).populate('user_id');
     }

@@ -16,6 +16,44 @@ class PostitController {
         }
     }
 
+    async getAllPostits(req, res){
+        try {
+            let pagination = req.params.pagination * 10;
+            const data = await postitService.getAllPostits(pagination);
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false });
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+    }
+    
+
+    async getAllDeletedPostits(req, res){
+        try {
+            let pagination = req.params.pagination * 10;
+            const data = await postitService.getAllDeletedPostits(pagination);
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false });
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+    }
+    
+
     async getSinglePostit(req, res) {
         let postitId = req.params.postitId;
 

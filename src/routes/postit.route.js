@@ -10,6 +10,12 @@ const { createPostitSchema, getAllPostitsSchema, getUserDeletedPostitsSchema, ge
 //Create Postit   
 postitRouter.post("/", [validateBody(createPostitSchema), authenticateToken], postitController.createPostit);
 
+//Get all postits [admin]
+postitRouter.get("/all/:pagination", [validateParams(getAllPostitsSchema), authenticateToken, adminAuthorization], postitController.getAllPostits);
+
+//Get all deleted postits [admin]
+postitRouter.get("/all-deleted/:pagination", [validateParams(getAllPostitsSchema), authenticateToken, adminAuthorization], postitController.getAllDeletedPostits);
+
 //Get all postits created by logged in user
 postitRouter.get("/:pagination", [validateParams(getAllPostitsSchema), authenticateToken], postitController.getUserPostits);
 
