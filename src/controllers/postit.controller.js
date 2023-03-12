@@ -100,8 +100,10 @@ class PostitController {
     async updatePostit(req, res) {
         try {
             let postitId = req.params.postitId;
-            let update = req.body
-            const data = await postitService.updatePostit(postitId, update);
+            let update = req.body;
+            let userId = req.user._id;
+
+            const data = await postitService.updatePostit(postitId, update, userId);
             if (data) {
                 res.status(201)
                     .send({ message: MESSAGES.UPDATED, success: true, data });

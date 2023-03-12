@@ -36,8 +36,8 @@ class PostItService {
         }
     }
 
-    async updatePostit(postitId, update) {
-        return await Postit.findOneAndUpdate({ '_id': postitId }, update, { new: true }).populate('user_id');
+    async updatePostit(postitId, update, userId) {
+        return await Postit.findOneAndUpdate({ '_id': postitId, 'user_id': userId }, update, { new: true }).populate('user_id');
     }
 
     async deletePostit(postitId, loggedInUserId) {
