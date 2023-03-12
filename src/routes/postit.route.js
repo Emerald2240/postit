@@ -37,5 +37,10 @@ postitRouter.patch("/:postitId", [validateParams(postitIdSchema), validateBody(u
 //Soft Delete postit
 postitRouter.delete("/:postitId", [validateParams(postitIdSchema), authenticateToken], postitController.deletePostit);
 
+//documentation redirect
+postitRouter.get("/docs", (req, res) => {
+    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQPF8');
+});
+
 
 module.exports = postitRouter;
