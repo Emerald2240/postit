@@ -1,5 +1,7 @@
 const userService = require('../services/user.service');
 const constants = require("../constants/constants");
+const { generateRandomAvatar } = require("../vendors/dicebar");
+
 const { MESSAGES } = constants;
 
 class UserController {
@@ -12,6 +14,7 @@ class UserController {
     async signUp(req, res) {
 
         try {
+            req.body.avatar = await generateRandomAvatar(req.body.email);
             const data = await userService.createUser(req.body);
             res
                 .status(201)
@@ -112,7 +115,9 @@ class UserController {
     //Update/edit user data
     async updateUserProfile(req, res) {
         try {
+            req.body.avatar = await generateRandomAvatar(req.user.email);
             const data = await userService.updateUserByEmail(req.user.email, req.body);
+
             if (data) {
                 res
                     .status(201)

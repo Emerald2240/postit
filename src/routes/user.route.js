@@ -9,22 +9,26 @@ const adminAuthorization = require("../middlewares/adminPriviledges.middleware")
 const { signUpSchema, emailSchema, userIdSchema, updateUserSchema } = require("../validators/schemas/user.schema");
 
 //CREATE
+//documentation redirect
+userRouter.get("/docs", (req, res) => {
+    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioa');
+});
+
 //Register Account
 userRouter.post("/", [validateBody(signUpSchema)], userController.signUp);
 
 //READ
 //Get all users with pagination [admin]
-userRouter.get("/:pagination", /*[authenticateToken, adminAuthorization],*/ userController.fetchAllUsers);
+userRouter.get("/:pagination", [authenticateToken, adminAuthorization], userController.fetchAllUsers);
 
 //get a particular user with email
 userRouter.get("/:email", [validateParams(emailSchema), authenticateToken], userController.fetchUser);
 
 //get a particular user with user id
-userRouter.get("/id/:userId", [validateParams(userIdSchema), authenticateToken, adminAuthorization], userController.fetchUserWithId);
+userRouter.get("/id/:userId", [validateParams(userIdSchema), authenticateToken], userController.fetchUserWithId);
 
 //get all deleted users with pagination [admin]
-userRouter.get("/deleted/:pagination", /*[authenticateToken, adminAuthorization],*/ userController.fetchAllDeletedUsers);
-
+userRouter.get("/deleted/:pagination", [authenticateToken], userController.fetchAllDeletedUsers);
 
 
 //UPDATE
@@ -35,9 +39,5 @@ userRouter.patch("/", [validateBody(updateUserSchema), authenticateToken], userC
 //Delete user account
 userRouter.delete("/", [authenticateToken], userController.deleteUserAccount);
 
-//documentation redirect
-userRouter.get("/docs", (req, res) => {
-    res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioa');
-});
 
 module.exports = userRouter;

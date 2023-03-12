@@ -1,15 +1,6 @@
 refresh tokens shouldnt be passed in the body. postman is complaining
-find an accurate limit for jwt token expiry
-fine tune error messages. they are currently just returning null
-populate reference values at the right places
-add a getparticular user function to postman users collection
-dont forget to readd auth to getAllUsers and getAllDeletedusers routes when youre done
-Remove sensitive comment data in the createComment function
-ensure users cannot edit or touch postits they did not create
-update postman documentation to account new populate function added to code
-remove unneeded values from the responses(__v)
-update user profile picture once they update their profile (most probably anything at all)
 a deleted user is still able to login. FIX THIS IMMEDIATELY!!!
 add documentation for regular users trying to do admin level tasks
 ensure only resource owners can delete or update
 rewrite documentation and set it to live server
+add @ to all the routes requiring user handles
