@@ -153,9 +153,10 @@ class CommentController {
     async editComment(req, res) {
         let commentId = req.params.commentId;
         let commentUpdateBody = req.body.body;
+        let userId = req.user._id;
 
         try {
-            const data = await commentService.updateComment(commentId, commentUpdateBody);
+            const data = await commentService.updateComment(commentId, commentUpdateBody, userId);
 
             if (data) {
                 res.status(201)
@@ -174,9 +175,10 @@ class CommentController {
     //Delete a particular comment
     async deleteComment(req, res) {
         let commentId = req.params.commentId;
+        let userId = req.user._id;
 
         try {
-            const data = await commentService.deleteComment(commentId);
+            const data = await commentService.deleteComment(commentId, userId);
             if (data) {
                 res.status(201)
                     .send({ message: MESSAGES.DELETED, success: true, data });

@@ -116,12 +116,12 @@ class CommentService {
         }
     }
 
-    async updateComment(commentId, body) {
-        return await Comment.findOneAndUpdate({ '_id': commentId, 'deleted': false }, { 'body': body }, { new: true });
+    async updateComment(commentId, body, userId) {
+        return await Comment.findOneAndUpdate({ '_id': commentId, 'user_id': userId, 'deleted': false }, { 'body': body }, { new: true });
     }
 
-    async deleteComment(commentId) {
-        return await Comment.findOneAndUpdate({ '_id': commentId }, { 'deleted': true }, { new: true });
+    async deleteComment(commentId, userId) {
+        return await Comment.findOneAndUpdate({ '_id': commentId, 'user_id': userId }, { 'deleted': true }, { new: true });
     }
 }
 
