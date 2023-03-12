@@ -15,6 +15,22 @@ class UserService {
 
         user.password = hashedPassword;
 
+        //Checks for a user with either the email or the handle, if it finds a match, it returns an error
+        let userCheck = await User.findOne()
+            .and([
+                {
+                    $or: [
+                        { 'email': user.email },
+                        { 'handle': user.handle },
+                    ]
+                }
+            ]);
+
+        if (userCheck._id) {
+            return { error: 'Email or Handle already exists' }
+        }
+
+        //Create user
         let createdUser = await User.create(user);
         return ({
             _id: createdUser._id,
