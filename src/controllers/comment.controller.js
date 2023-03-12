@@ -16,6 +16,69 @@ class CommentController {
             .send({ message: MESSAGES.FETCHED, success: true, data });
     }
 
+    //get a particular comment under a particular postit
+    async getCommentUnderPostit(req, res) {
+        let postitId = req.params.postitId;
+        let commentId = req.params.commentId;
+
+        try {
+            const data = await commentService.getCommentUnderPostit(postitId, commentId);
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false })
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+    }
+
+    //get a particular comment under a particular postit under a particular user
+    async getCommentUnderPostitUnderUser(req, res) {
+        let userId = req.params.userId;
+        let postitId = req.params.postitId;
+        let commentId = req.params.commentId;
+
+        try {
+            const data = await commentService.getCommentUnderPostitUnderUser(userId, postitId, commentId);
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false })
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+    }
+
+    //Get all comments by a particular user
+    async getAllUserComments(req, res) {
+        let userId = req.params.userId;
+        let pagination = req.params.pagination * 10;
+        try {
+            const data = await commentService.getAllCommentsUnderUser(userId, pagination);
+            if (data) {
+                res.status(201)
+                    .send({ message: MESSAGES.FETCHED, success: true, data });
+            } else {
+                res.status(404)
+                    .send({ message: "Postit not found", success: false })
+            }
+        } catch (err) {
+            res
+                .status(500)
+                .send({ message: err.message || MESSAGES.ERROR, success: false });
+        }
+    }
+
     //get all deleted comments
     async getAllDeletedComments(req, res) {
         let pagination = req.params.pagination * 10;

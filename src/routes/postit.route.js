@@ -26,7 +26,7 @@ postitRouter.get("/all-deleted/:pagination", [validateParams(getAllPostitsSchema
 postitRouter.get("/:pagination", [validateParams(getAllPostitsSchema), authenticateToken], postitController.getUserPostits);
 
 //Get postits created by an external user handle
-postitRouter.get("/external/:userHandle/:pagination", [validateParams(getExternalUsersPostitsSchema), authenticateToken], postitController.getExternalUserPostits);
+postitRouter.get("/external/@:userHandle/:pagination", [validateParams(getExternalUsersPostitsSchema), authenticateToken], postitController.getExternalUserPostits);
 
 //Find a particular postit using its postitid
 postitRouter.get("/single/:postitId", [validateParams(postitIdSchema), authenticateToken], postitController.getSinglePostit);
@@ -35,7 +35,7 @@ postitRouter.get("/single/:postitId", [validateParams(postitIdSchema), authentic
 postitRouter.get("/single-deleted/:postitId", [validateParams(postitIdSchema), authenticateToken, adminAuthorization], postitController.getSingleDeletedPostit);
 
 //Get all postits deleted softly by user [admin]     
-postitRouter.get("/deleted/:userHandle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
+postitRouter.get("/deleted/@:userHandle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
 
 //Update postit by its Id
 postitRouter.patch("/:postitId", [validateParams(postitIdSchema), validateBody(updatePostitSchema), authenticateToken], postitController.updatePostit);

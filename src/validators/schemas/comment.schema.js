@@ -81,6 +81,30 @@ const getAllUserDeletedCommentsSchema = joi.object({
         .required()
 });
 
+const getCommentUnderPostitSchema = joi.object({
+    postitId: joi.string()
+        .min(24)
+        .required(),
+
+    commentId: joi.string()
+        .min(24)
+        .required()
+});
+
+const getCommentUnderPostitUnderUserSchema = joi.object({
+    postitId: joi.string()
+    .min(24)
+    .required(),
+
+commentId: joi.string()
+    .min(24)
+    .required(),
+
+    userId: joi.string()
+    .min(24)
+    .required()
+})
+
 
 //UPDATE
 const editCommentSchema = joi.object({
@@ -92,4 +116,7 @@ const editCommentSchema = joi.object({
 
 
 
-module.exports = { commentIdSchema, paginationSchema, postitIdSchema, commentSchema, getCommentSchema, getAllPostitCommentsSchema, searchPostitForCommentSchema, searchPostitForCommentSchemaParam, getAllDeletedCommentsSchema, getAllUserDeletedCommentsSchema, editCommentSchema };
+
+
+
+module.exports = {getCommentUnderPostitUnderUserSchema, getCommentUnderPostitSchema, commentIdSchema, paginationSchema, postitIdSchema, commentSchema, getCommentSchema, getAllPostitCommentsSchema, searchPostitForCommentSchema, searchPostitForCommentSchemaParam, getAllDeletedCommentsSchema, getAllUserDeletedCommentsSchema, editCommentSchema };
