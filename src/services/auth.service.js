@@ -7,7 +7,8 @@ class AuthService {
     async login(email, password) {
         let emailRegexed = new RegExp(email, 'i');
 
-        const user = await User.findOne({ 'email': emailRegexed }, "+password +user_type");
+        const user = await User.findOne({ 'email': emailRegexed }, "+password +user_type")
+            .select('-__v ');
 
         if (!user) {
             return null;

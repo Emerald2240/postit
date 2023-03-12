@@ -17,7 +17,7 @@ const constants = {
         CREATED: "Resource created successfully",
         DELETED: "Resource deleted successfully",
         NOT_FOUND: "Resource not found",
-        DEFAULT: "",
+        DEFAULT: "Request received successfully",
         AUTH_DEFAULT: "",
         LOGOUT: "Successfully logged out! Have a nice day.",
         LOGIN_FIRST: "Error! Login first",

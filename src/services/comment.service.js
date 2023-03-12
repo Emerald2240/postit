@@ -4,19 +4,23 @@ const PostitService = require("./postit.service");
 
 class CommentService {
     async getAllComments(pagination) {
-        return await Comment.find({ 'deleted': false }).populate('user_id')
+        return await Comment.find({ 'deleted': false })
+            .populate('user_id')
             .limit(10)
             .skip(pagination)
             .sort({ 'createdAt': 'desc' })
-            .populate('postit_ref_id');
+            .populate('postit_ref_id')
+            .select('-__v ');
     }
 
     async getAllDeletedComments(pagination) {
-        return await Comment.find({ 'deleted': true }).populate('user_id')
+        return await Comment.find({ 'deleted': true })
             .limit(10)
             .skip(pagination)
             .sort({ 'createdAt': 'desc' })
-            .populate('postit_ref_id');
+            .populate('user_id')
+            .populate('postit_ref_id')
+            .select('-__v ');
     }
 
     async createComment(body) {
@@ -44,7 +48,8 @@ class CommentService {
                 .limit(10)
                 .skip(pagination)
                 .sort({ 'createdAt': 'desc' })
-                .populate('user_id');
+                .populate('user_id')
+                .select('-__v ');
             if (allComments) {
                 return { postit: postitInfo, comments: allComments }
             } else {
@@ -56,7 +61,10 @@ class CommentService {
     }
 
     async getComment(commentId) {
-        return await Comment.find({ '_id': commentId, 'deleted': false }).populate('user_id').populate('postit_ref_id');
+        return await Comment.find({ '_id': commentId, 'deleted': false })
+            .populate('user_id')
+            .populate('postit_ref_id')
+            .select('-__v ');
     }
 
     async searchComments(postitId, pagination, searchText) {
@@ -67,7 +75,8 @@ class CommentService {
                 .populate('user_id')
                 .limit(10)
                 .skip(pagination)
-                .sort({ 'createdAt': 'desc' });
+                .sort({ 'createdAt': 'desc' })
+                .select('-__v ');
             if (foundComments) {
                 return foundComments;
             } else {
@@ -87,7 +96,8 @@ class CommentService {
                 .populate('user_id')
                 .limit(10)
                 .skip(pagination)
-                .sort({ 'createdAt': 'desc' });
+                .sort({ 'createdAt': 'desc' })
+                .select('-__v ');
             if (foundComments) {
                 return foundComments;
             } else {
@@ -105,7 +115,8 @@ class CommentService {
                 .populate('user_id')
                 .limit(10)
                 .skip(pagination)
-                .sort({ 'createdAt': 'desc' });
+                .sort({ 'createdAt': 'desc' })
+                .select('-__v ');
             if (foundComments) {
                 return foundComments;
             } else {
@@ -117,11 +128,13 @@ class CommentService {
     }
 
     async updateComment(commentId, body, userId) {
-        return await Comment.findOneAndUpdate({ '_id': commentId, 'user_id': userId, 'deleted': false }, { 'body': body }, { new: true });
+        return await Comment.findOneAndUpdate({ '_id': commentId, 'user_id': userId, 'deleted': false }, { 'body': body }, { new: true })
+            .select('-__v ');
     }
 
     async deleteComment(commentId, userId) {
-        return await Comment.findOneAndUpdate({ '_id': commentId, 'user_id': userId }, { 'deleted': true }, { new: true });
+        return await Comment.findOneAndUpdate({ '_id': commentId, 'user_id': userId }, { 'deleted': true }, { new: true })
+            .select('-__v ');
     }
 }
 
