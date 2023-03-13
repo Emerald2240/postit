@@ -114,7 +114,7 @@ This app makes use of the *Layered(MVC)* pattern. I chose it because it's easier
 
 > "Decide what you will do with deleted post-its, and in your readme, explain what you later did."
 
-No resource in this app is actually destroyed, soft delete is implemented everywhere. 'Deleted' postits are just removed from regular requests and for regular users, but can be viewed by admins. When postits are 'deleted', the comments remain untouched. The 'deleted' resources can be used in the future for accountability or as backup for users who claim to have accidently deleted their data.
+Here, no resource is truly destroyed, instead soft delete is implemented. 'Deleted' postits are just removed from regular requests and for regular users, but can be viewed by admins. When postits are 'deleted', the comments remain untouched. The 'deleted' resources can be used in the future for accountability or as backup for users who claim to have accidently deleted their data.
 
  ---
  
