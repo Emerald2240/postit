@@ -14,12 +14,9 @@ commentRouter.get("/docs", (req, res) => {
     res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioZ');
 });
 
-// CREATE //////////////////////////////////////////////////////////////
 //Create comment
 commentRouter.post("/postits/:postitId", [validateParams(postitIdSchema), validateBody(commentSchema), authenticateToken], commentController.comment);
 
-
-// READ //////////////////////////////////////////////////////////////
 //Get a particular comment with its comment ID
 commentRouter.get("/:commentId", [validateParams(getCommentSchema), authenticateToken], commentController.getParticularComment);
 
@@ -50,13 +47,9 @@ commentRouter.get("/:commentId/postits/:postitId", [validateParams(getCommentUnd
 //get a particular comment under a particular postit under a particular user
 commentRouter.get("/:commentId/postits/:postitId/users/:userId", [validateParams(getCommentUnderPostitUnderUserSchema), authenticateToken], commentController.getCommentUnderPostitUnderUser);
 
-
-// UPDATE //////////////////////////////////////////////////////////////
 // Update a particular comment
 commentRouter.patch("/:commentId", [validateParams(commentIdSchema), validateBody(editCommentSchema), authenticateToken], commentController.editComment);
 
-
-// DELETE //////////////////////////////////////////////////////////////
 //Delete a particular comment
 commentRouter.delete("/:commentId", [validateParams(commentIdSchema), authenticateToken], commentController.deleteComment);
 
