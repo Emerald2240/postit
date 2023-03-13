@@ -21,7 +21,7 @@ const signUpSchema = joi.object({
         .required(),
 
     handle: joi.string()
-        .min(5)
+        .min(3)
         .max(100)
         .required(),
 
@@ -45,7 +45,7 @@ const updateUserSchema = joi.object({
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
 
     handle: joi.string()
-        .min(5)
+        .min(3)
         .max(100)
 });
 
@@ -57,8 +57,14 @@ const emailSchema = joi.object({
 
 const userIdSchema = joi.object({
     userId: joi.string()
-    .min(24)
-    .required()
+        .min(24)
+        .required()
 });
 
-module.exports = { signUpSchema, emailSchema, userIdSchema, updateUserSchema };
+const userHandleSchema = joi.object({
+    userHandle: joi.string()
+        .min(3)
+        .max(100)
+})
+
+module.exports = { userHandleSchema, signUpSchema, emailSchema, userIdSchema, updateUserSchema };

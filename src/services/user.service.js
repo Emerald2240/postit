@@ -46,6 +46,7 @@ class UserService {
 
     }
 
+    //get user with email address
     async getUser(email) {
         //Makes email search filter case insensitive and a lot more broad(even if search parameter isnt completely correct.)
         let emailRegexed = new RegExp(email, 'i');
@@ -56,6 +57,11 @@ class UserService {
 
     async getUserWithUserId(userId) {
         return await User.findOne({ '_id': userId, 'deleted': false })
+            .select('-__v ');
+    }
+
+    async getUserWithHandle(userHandle) {
+        return await User.findOne({ 'handle': userHandle, 'deleted': false })
             .select('-__v ');
     }
 
