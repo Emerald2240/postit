@@ -7,6 +7,7 @@ const { MESSAGES } = constants;
 const authService = require("../services/auth.service");
 const jwt = require('jsonwebtoken');
 
+//these variables store authentication values
 var user = [];
 var refreshTokenStore = '';
 
@@ -43,7 +44,6 @@ class AuthController {
         try {
             //pass the data to the login service module
             user = await authService.login(req.body.email, req.body.password);
-            // console.log(user);
             if (user) {
 
                 //creates new access token and refresh token for the user
