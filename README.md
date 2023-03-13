@@ -70,6 +70,25 @@ Example:
 }
 ```
 
+Sample Response:
+```json
+{
+    "message": "Resource created successfully",
+    "success": true,
+    "data": {
+        "_id": "640f2f02946b98ed90a80951",
+        "first_name": "Michael",
+        "last_name": "Orji",
+        "email": "orjimichael@learnabl.com",
+        "handle": "SubZeroMax",
+        "avatar": "https://api.dicebear.com/5.x/croodles-neutral/svg?seed=orjimichael-5iub9-learnabl-5he72-com&size=200&radius=50",
+        "avatar_wrapped": "<img src='https://api.dicebear.com/5.x/croodles-neutral/svg?seed=orjimichael-5iub9-learnabl-5he72-com&size=200&radius=50' alt='SubZeroMax'>",
+        "createdAt": "2023-03-13T14:11:14.310Z",
+        "updatedAt": "2023-03-13T14:11:14.310Z"
+    }
+}
+```
+
 Once succesfully registered, create another post request to **localhost:5000/api/v1/auth/login**; supply it your email and password; if correct, you'll get a refresh token and access token, pass in the latter as a bearer token before making any requests, depending on your user type you should have access to most of the API resources.
 
 
