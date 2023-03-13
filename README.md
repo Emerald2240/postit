@@ -3,7 +3,7 @@
 Build a simple social media app called Postit (or Post-it). Post-it allows you to post anything (text, images, video, and/or audio) on a single post-it. A post-it is a single post on the post-it app, just like a tweet. Other users can reply to a post-it. Replying to a post-it is like adding a comment to a post (post-it). A post-it reply can also be one or a combination of text and other media already mentioned. To simplify things, a post-it and its replies can just be text for now.
 
 
-[![Latest release](https://img.shields.io/github/v/release/mhucka/readmine.svg?style=flat-square&color=b44e88)](https://github.com/mhucka/readmine/releases)
+[![Latest release](https://img.shields.io/github/v/release/mhucka/readmine.svg?style=flat-square&color=b44e88)](https://github.com/emerald2240/postit)
 
 
 ## Table of contents
@@ -45,7 +45,6 @@ node app.js
 Usage
 ------
 The API is comprised of three main resources: 
-
 - Users
 - Postits
 - Comments
