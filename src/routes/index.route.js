@@ -8,6 +8,7 @@ const constants = require("../constants/constants");
 const { MESSAGES } = constants;
 
 
+//default response
 router.get("/", (req, res) => {
     res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
 });

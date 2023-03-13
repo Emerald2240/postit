@@ -7,7 +7,7 @@ const { validateBody } = require("../validators/validatorBody");
 const { loginSchema, refreshTokenSchema } = require("../validators/schemas/auth.schema");
 
 
-// default
+//default response
 authRouter.get("/", (req, res) => {
     res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
 });
