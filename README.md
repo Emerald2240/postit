@@ -12,7 +12,7 @@ Build a simple social media app called Postit (or Post-it). Post-it allows you t
 * [Installation](#installation)
 * [Short Sample Usage](#short-sample-usage)
 * [Documentation](#documentation)
-* [Motivations](#motivations)
+* [Choices and Motivations](#choices-and-motivations)
 * [Contribution](#contributing)
 * [Acknowledgments](#acknowledgments)
 
@@ -103,7 +103,7 @@ For full info on how the API works and how to consume it, refer to: [justpostit/
 - Comments: [https://documenter.getpostman.com/view/24521226/2s93JtQioZ](https://documenter.getpostman.com/view/24521226/2s93JtQioZ)
 
 
-Motivations
+Choices and Motivations
 ------------
 
 

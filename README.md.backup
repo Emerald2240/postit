@@ -12,7 +12,7 @@ Build a simple social media app called Postit (or Post-it). Post-it allows you t
 * [Installation](#installation)
 * [Short Sample Usage](#short-sample-usage)
 * [Documentation](#documentation)
-* [Motivations](#motivations)
+* [Choices and Motivations](#motivations)
 * [Contribution](#contributing)
 * [Acknowledgments](#acknowledgments)
 
@@ -89,7 +89,7 @@ Sample Response:
 }
 ```
 
-Once succesfully registered, create another post request to **localhost:5000/api/v1/auth/login**; supply it your email and password; if correct, you'll get a refresh token and access token, pass in the latter as a bearer token before making any requests, depending on your user type you should have access to most of the API resources. Checkout the documentation below for full details on how to consume the API
+Once succesfully registered, create another post request to **localhost:5000/api/v1/auth/login**; supply it your email and password; if correct, you'll get a refresh token and access token, pass in the latter as a bearer token before making any requests, depending on your user type you should have access to most of the API resources. Checkout the documentations below for full details on how to consume the API.
 
 
 Documentation
