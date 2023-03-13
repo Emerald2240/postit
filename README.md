@@ -63,28 +63,10 @@ Example:
 {
     "first_name":"Michael",
     "last_name":"Orji",
-    "email":"orjimichael@learnabl.com",
-    "handle":"SubZeroMax",
+    "email":"orjimichael@learnable.com",
+    "handle":"SubZero",
     "password":"12345",
     "user_type":"admin"
-}
-```
-Response:
-```json
-{
-    "message": "Resource created successfully",
-    "success": true,
-    "data": {
-        "_id": "640f2f02946b98ed90a80951",
-        "first_name": "Michael",
-        "last_name": "Orji",
-        "email": "orjimichael@learnabl.com",
-        "handle": "SubZeroMax",
-        "avatar": "https://api.dicebear.com/5.x/croodles-neutral/svg?seed=orjimichael-5iub9-learnabl-5he72-com&size=200&radius=50",
-        "avatar_wrapped": "<img src='https://api.dicebear.com/5.x/croodles-neutral/svg?seed=orjimichael-5iub9-learnabl-5he72-com&size=200&radius=50' alt='SubZeroMax'>",
-        "createdAt": "2023-03-13T14:11:14.310Z",
-        "updatedAt": "2023-03-13T14:11:14.310Z"
-    }
 }
 ```
 
@@ -96,6 +78,10 @@ Documentation
 For full info on how the API works and how to consume it, refer to: [justpostit/docs](https://justpostit.onrender.com/api/v1/docs) for its documentation. Simply replace **justpostit.onrender.com** with **localhost:5000** if running the app locally.
 
 - Database Model: [https://dbdesigner.page.link/eqmiCimxeioSnwvA8](https://dbdesigner.page.link/eqmiCimxeioSnwvA8)
+- Auth: [https://documenter.getpostman.com/view/24521226/2s93JtQioY](https://documenter.getpostman.com/view/24521226/2s93JtQioY)
+- Users: [https://documenter.getpostman.com/view/24521226/2s93JtQioa](https://documenter.getpostman.com/view/24521226/2s93JtQioa)
+- Postits: [https://documenter.getpostman.com/view/24521226/2s93JtQPF8](https://documenter.getpostman.com/view/24521226/2s93JtQPF8)
+- Comments: [https://documenter.getpostman.com/view/24521226/2s93JtQioZ](https://documenter.getpostman.com/view/24521226/2s93JtQioZ)
 
 
 Motivations

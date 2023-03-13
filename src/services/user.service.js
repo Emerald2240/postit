@@ -27,7 +27,7 @@ class UserService {
                 }
             ]);
 
-        if (userCheck._id) {
+        if (userCheck) {
             return { error: 'Email or Handle already exists' }
         }
 
@@ -40,6 +40,7 @@ class UserService {
             email: createdUser.email,
             handle: createdUser.handle,
             avatar: createdUser.avatar,
+            avatar_wrapped: createdUser.avatar_wrapped,
             createdAt: createdUser.createdAt,
             updatedAt: createdUser.updatedAt
         })

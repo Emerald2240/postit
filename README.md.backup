@@ -3,7 +3,7 @@
 Build a simple social media app called Postit (or Post-it). Post-it allows you to post anything (text, images, video, and/or audio) on a single post-it. A post-it is a single post on the post-it app, just like a tweet. Other users can reply to a post-it. Replying to a post-it is like adding a comment to a post (post-it). A post-it reply can also be one or a combination of text and other media already mentioned. To simplify things, a post-it and its replies can just be text for now.
 
 
-[![Latest release](https://img.shields.io/github/v/release/mhucka/readmine.svg?style=flat-square&color=b44e88)](https://github.com/mhucka/readmine/releases)
+[![Latest release](https://img.shields.io/github/v/release/mhucka/readmine.svg?style=flat-square&color=b44e88)](https://github.com/emerald2240/postit)
 
 
 ## Table of contents
@@ -35,7 +35,7 @@ This project is a NodeJs/Vanilla JavaScript app that runs with Express. Download
 ```bash
 node app.js
 ```
-- To start the server in development with nodemon running type: 
+- To start the server in development with nodemon running, run this command: 
  ```bash
  npm run dev
  ```
@@ -45,7 +45,6 @@ node app.js
 Usage
 ------
 The API is comprised of three main resources: 
-
 - Users
 - Postits
 - Comments
@@ -79,6 +78,10 @@ Documentation
 For full info on how the API works and how to consume it, refer to: [justpostit/docs](https://justpostit.onrender.com/api/v1/docs) for its documentation. Simply replace **justpostit.onrender.com** with **localhost:5000** if running the app locally.
 
 - Database Model: [https://dbdesigner.page.link/eqmiCimxeioSnwvA8](https://dbdesigner.page.link/eqmiCimxeioSnwvA8)
+- Auth: [https://documenter.getpostman.com/view/24521226/2s93JtQioY](https://documenter.getpostman.com/view/24521226/2s93JtQioY)
+- Users: [https://documenter.getpostman.com/view/24521226/2s93JtQioa](https://documenter.getpostman.com/view/24521226/2s93JtQioa)
+- Postits: [https://documenter.getpostman.com/view/24521226/2s93JtQPF8](https://documenter.getpostman.com/view/24521226/2s93JtQPF8)
+- Comments: [https://documenter.getpostman.com/view/24521226/2s93JtQioZ](https://documenter.getpostman.com/view/24521226/2s93JtQioZ)
 
 
 Motivations
