@@ -9,10 +9,14 @@ const { loginSchema, refreshTokenSchema } = require("../validators/schemas/auth.
 authRouter.get("/", (req, res) => {
     res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
 });
+
+//refresh token
 authRouter.get("/token", validateBody(refreshTokenSchema), authController.refreshAccessToken);
 
+//login
 authRouter.post("/login", validateBody(loginSchema), authController.login);
 
+//logout
 authRouter.delete("/logout", authController.logout);
 
 //documentation redirect
