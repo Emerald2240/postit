@@ -17,25 +17,25 @@ postitRouter.get("/docs", (req, res) => {
 postitRouter.post("/", [validateBody(createPostitSchema), authenticateToken], postitController.createPostit);
 
 //Get all postits [admin]
-postitRouter.get("/all/:pagination", [validateParams(getAllPostitsSchema), authenticateToken, adminAuthorization], postitController.getAllPostits);
+postitRouter.get("/admin/:pagination", [validateParams(getAllPostitsSchema), authenticateToken, adminAuthorization], postitController.getAllPostits);
 
 //Get all deleted postits [admin]
-postitRouter.get("/all-deleted/:pagination", [validateParams(getAllPostitsSchema), authenticateToken, adminAuthorization], postitController.getAllDeletedPostits);
+postitRouter.get("/deleted/:pagination", [validateParams(getAllPostitsSchema), authenticateToken, adminAuthorization], postitController.getAllDeletedPostits);
 
 //Get all postits created by logged in user
 postitRouter.get("/:pagination", [validateParams(getAllPostitsSchema), authenticateToken], postitController.getUserPostits);
 
 //Get postits created by an external user handle
-postitRouter.get("/external/@:userHandle/:pagination", [validateParams(getExternalUsersPostitsSchema), authenticateToken], postitController.getExternalUserPostits);
+postitRouter.get("/users/@:userHandle/:pagination", [validateParams(getExternalUsersPostitsSchema), authenticateToken], postitController.getExternalUserPostits);
 
 //Find a particular postit using its postitid
 postitRouter.get("/single/:postitId", [validateParams(postitIdSchema), authenticateToken], postitController.getSinglePostit);
 
 //Find a particular deleted postit using its postitid [admin]
-postitRouter.get("/single-deleted/:postitId", [validateParams(postitIdSchema), authenticateToken, adminAuthorization], postitController.getSingleDeletedPostit);
+postitRouter.get("/deleted/single/:postitId", [validateParams(postitIdSchema), authenticateToken, adminAuthorization], postitController.getSingleDeletedPostit);
 
 //Get all postits deleted softly by user [admin]     
-postitRouter.get("/deleted/@:userHandle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
+postitRouter.get("/deleted/users/@:userHandle/:pagination", [validateParams(getUserDeletedPostitsSchema), authenticateToken, adminAuthorization], postitController.getUserDeletedPostits);
 
 //Update postit by its Id
 postitRouter.patch("/:postitId", [validateParams(postitIdSchema), validateBody(updatePostitSchema), authenticateToken], postitController.updatePostit);

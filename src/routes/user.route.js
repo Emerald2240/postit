@@ -22,7 +22,7 @@ userRouter.post("/", [validateBody(signUpSchema)], userController.signUp);
 userRouter.get("/:pagination", [authenticateToken, adminAuthorization], userController.fetchAllUsers);
 
 //get a particular user with email
-userRouter.get("/:email", [validateParams(emailSchema), authenticateToken], userController.fetchUser);
+userRouter.get("/email/:email", [validateParams(emailSchema), authenticateToken], userController.fetchUser);
 
 //get a particular user with user id
 userRouter.get("/id/:userId", [validateParams(userIdSchema), authenticateToken], userController.fetchUserWithId);
