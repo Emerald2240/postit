@@ -25,15 +25,4 @@ Build a simple social media app called Postit (or Post-it). Post-it allows you t
 Introduction
 -------------
 
-This is a twitter like social media web API that lets users share 250 char texts(postits) to the world. The API is currently hosted live at [justpostit](https://justpostit.onrender.com). For info on how it works and how to consume it, refer to: [justpostit/docs](https://justpostit.onrender.com/api/v1/docs) for its documentation.
-
-Installation
--------------
-This project is a NodeJs/Vanilla JavaScript app that runs with Express. Download the code locally into your machine and ensure you have NodeJs installed on your computer. 
-- clone the repository
-- install the dependencies: using `npm install`
-- create a new file named `.env` in root folder of the project.
-- Copy and paste the content of `.env.example` into `.env` and filling the value with the appropriate mongoose URI values.
-- You are advice to use atlas for the `DATABASE_URL` key but local database url is fine
-- run `npm build` to build the Javascript files from Typescript; start the server in development with nodemon by running: `npm run dev` and read the terminal output to make sure that the server is running and the database is connected properly or use `npm run start` to run it directly without any extras (this mode is advised for live hosting).
-
+This is a twitter like social media web API that lets users share 250 char texts(postits) to the world. The API is currently hosted live at [https://justpostit.com](https://justpostit.onrender.com). For info on how it works and how to consume it, refer to: [justpostit.com/api/v1/docs](https://justpostit.onrender.com/api/v1/docs) for its documentation.

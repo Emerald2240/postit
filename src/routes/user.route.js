@@ -8,7 +8,6 @@ const adminAuthorization = require("../middlewares/adminPriviledges.middleware")
 
 const { userHandleSchema, signUpSchema, emailSchema, userIdSchema, updateUserSchema } = require("../validators/schemas/user.schema");
 
-//CREATE
 //documentation redirect
 userRouter.get("/docs", (req, res) => {
     res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioa');
@@ -17,7 +16,6 @@ userRouter.get("/docs", (req, res) => {
 //Register Account
 userRouter.post("/", [validateBody(signUpSchema)], userController.signUp);
 
-//READ
 //Get all users with pagination [admin]
 userRouter.get("/:pagination", [authenticateToken, adminAuthorization], userController.fetchAllUsers);
 
@@ -33,12 +31,9 @@ userRouter.get("/id/:userId", [validateParams(userIdSchema), authenticateToken],
 //get all deleted users with pagination [admin]
 userRouter.get("/deleted/:pagination", [authenticateToken, adminAuthorization], userController.fetchAllDeletedUsers);
 
-
-//UPDATE
 //update your profile
 userRouter.patch("/", [validateBody(updateUserSchema), authenticateToken], userController.updateUserProfile);
 
-//DELETE
 //Delete user account
 userRouter.delete("/", [authenticateToken], userController.deleteUserAccount);
 
