@@ -1,5 +1,6 @@
 const joi = require("joi");
 
+
 const signUpSchema = joi.object({
     first_name: joi.string()
         .min(3)
@@ -66,5 +67,6 @@ const userHandleSchema = joi.object({
         .min(3)
         .max(100)
 })
+
 
 module.exports = { userHandleSchema, signUpSchema, emailSchema, userIdSchema, updateUserSchema };

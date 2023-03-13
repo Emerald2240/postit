@@ -1,5 +1,6 @@
 const joi = require('joi');
 
+
 const createPostitSchema = joi.object({
     body: joi.string()
         .min(3)
