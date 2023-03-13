@@ -12,7 +12,7 @@ Build a simple social media app called Postit (or Post-it). Post-it allows you t
 * [Installation](#installation)
 * [Short Sample Usage](#short-sample-usage)
 * [Documentation](#documentation)
-* [Choices and Motivations](#motivations)
+* [Choices and Motivations](#choices-and-motivations)
 * [Contribution](#contributing)
 * [Acknowledgments](#acknowledgments)
 
@@ -103,9 +103,35 @@ For full info on how the API works and how to consume it, refer to: [justpostit/
 - Comments: [https://documenter.getpostman.com/view/24521226/2s93JtQioZ](https://documenter.getpostman.com/view/24521226/2s93JtQioZ)
 
 
-Motivations
+Choices and Motivations
 ------------
 
+> "Choose a folder structure from Layered(MVC like) and Module(Domain Driven) and explain why you made your choice" 
+
+This app makes use of the *Layered(MVC)* pattern. I chose it because it's easier to read, use and maintain. It helps me seperate concerns and makes it easier to add updates in the future.
+
+---
+
+> "Decide what you will do with deleted post-its, and in your readme, explain what you later did."
+
+No resource in this app is actually destroyed, soft delete is implemented everywhere. 'Deleted' postits are just removed from regular requests and for regular users, but can be viewed by admins. When postits are 'deleted', the comments remain untouched. The 'deleted' resources can be used in the future for accountability or as backup for users who claim to have accidently deleted their data.
+
+ ---
+ 
+ >  "Write what you considered when building this app of yours."
+ 
+I considered many things whilst building the app:
+- Seamless use for frontend devs
+- Code readability
+- Folder and Route naming/organisation
+- Soft deletion management
+- Admin/Super User privilledges
+- Error handling
+- Mongoose reference data population
+- Auth/Login access tokens
+- Accurate http responses
+- API documentation redirection
+- Data input validation
 
 Contributions
 --------------
