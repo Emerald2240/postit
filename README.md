@@ -35,7 +35,7 @@ This project is a NodeJs/Vanilla JavaScript app that runs with Express. Download
 ```bash
 node app.js
 ```
-- To start the server in development with nodemon running type: 
+- To start the server in development with nodemon running, run this command: 
  ```bash
  npm run dev
  ```
@@ -62,10 +62,11 @@ To sign up, create a post request to
 Example: 
 ```json
 {
-    "first_name":"Michael"
-    "last_name":"Orji"
-    "email":"orjimichael@learnable.com"
-    "password":"12345"
+    "first_name":"Michael",
+    "last_name":"Orji",
+    "email":"orjimichael@learnable.com",
+    "handle":"SubZero",
+    "password":"12345",
     "user_type":"admin"
 }
 ```

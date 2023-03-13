@@ -22,6 +22,7 @@ Introduction
 
 This is a twitter like social media web API that lets users share 250 char texts(postits) to the world. The API is currently hosted live at [justpostit](https://justpostit.onrender.com).
 
+
 Installation
 -------------
 This project is a NodeJs/Vanilla JavaScript app that runs with Express. Download the code locally into your machine and ensure you have NodeJs installed on your computer. 
@@ -39,9 +40,6 @@ node app.js
  npm run dev
  ```
  - Read the terminal output to make sure that the server is running and the database is connected properly.
-
-
-
 
 
 Usage
@@ -64,15 +62,17 @@ To sign up, create a post request to
 Example: 
 ```json
 {
-    "first_name":"Michael"
-    "last_name":"Orji"
-    "email":"orjimichael@learnable.com"
-    "password":"12345"
+    "first_name":"Michael",
+    "last_name":"Orji",
+    "email":"orjimichael@learnable.com",
+    "handle":"SubZero",
+    "password":"12345",
     "user_type":"admin"
 }
 ```
 
 Once succesfully registered, create another post request to **localhost:5000/api/v1/auth/login**; supply it your email and password; if correct, you'll get a refresh token and access token, pass in the latter as a bearer token before making any requests, depending on your user type you should have access to most of the API resources.
+
 
 Documentation
 -------------
@@ -85,11 +85,11 @@ Motivations
 ------------
 
 
-
 Contributions
 --------------
 
 If you find any part of the app you can improve, just fork the project, work on your own copy then send me a pull request, i reply as soon as possible. Do try to make the pull request as small as possible, that way its easier to read through them.
+
 
 Acknowledgements
 -----------------
