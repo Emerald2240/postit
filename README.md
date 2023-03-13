@@ -10,7 +10,7 @@ Build a simple social media app called Postit (or Post-it). Post-it allows you t
 -------------------------------
 * [Introduction](#introduction)
 * [Installation](#installation)
-* [Usage](#usage)
+* [Short Sample Usage](#short-sample-usage)
 * [Documentation](#documentation)
 * [Motivations](#motivations)
 * [Contribution](#contributing)

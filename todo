@@ -1,4 +1,6 @@
 rewrite documentation and set it to live server(localhost to justpostit.render.com)
 update database model
 type readme
+MOTIVATION: Decide what you will do with deleted post-its, and in your readme, explain what you later did.
+
 pray to God it all ends well.
