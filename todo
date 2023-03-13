@@ -1,6 +1,4 @@
-refresh tokens shouldnt be passed in the body. postman is complaining
 rewrite documentation and set it to live server(localhost to justpostit.render.com)
-create a route under comments to get a particular comment under a particular postit
-create a route under users for getting all comments made by a particular user
-create a route to get a particular comment under a particular postit under a particular user
-ensure whenever all userinfo is returned, the avatar is placed in an image tag, also set the alt attribute to the user handle
+update database model
+type readme
+pray to God it all ends well.
