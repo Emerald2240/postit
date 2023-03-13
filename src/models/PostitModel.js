@@ -1,6 +1,6 @@
 const { model, Schema } = require("mongoose");
 const constants = require("../constants/constants");
-const { USER_TYPES, DATABASES } = constants;
+const { DATABASES } = constants;
 
 const PostitSchema = new Schema({
     user_id: {

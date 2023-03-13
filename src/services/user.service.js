@@ -1,22 +1,21 @@
 const User = require("../models/UserModel");
 const bcryptEncrypter = require("bcrypt");
-const wrapAvatar = require("../utils/avatarUrlTagWrapper");
 
 class UserService {
 
-    //Create new user
+    //create new user
     async createUser(user) {
 
-        //Add salt to hashing to make it unique
+        //add salt to hashing to make it unique
         const salt = await bcryptEncrypter.genSalt();
         const originalPassword = user.password;
 
-        //Hash and encrypt user entered password
+        //hash and encrypt user entered password
         const hashedPassword = await bcryptEncrypter.hash(originalPassword, salt);
 
         user.password = hashedPassword;
 
-        //Checks for a user with either the email or the handle, if it finds a match, it returns an error
+        //checks for a user with either the email or the handle, if it finds a match, it returns an error
         let userCheck = await User.findOne()
             .and([
                 {
@@ -31,7 +30,7 @@ class UserService {
             return { error: 'Email or Handle already exists' }
         }
 
-        //Create user
+        //create user
         let createdUser = await User.create(user);
         return ({
             _id: createdUser._id,
@@ -56,11 +55,13 @@ class UserService {
             .select('-__v ');
     }
 
+    //get a user with mongoose assigned id
     async getUserWithUserId(userId) {
         return await User.findOne({ '_id': userId, 'deleted': false })
             .select('-__v ');
     }
 
+    //get a user with their handle
     async getUserWithHandle(userHandle) {
         return await User.findOne({ 'handle': userHandle, 'deleted': false })
             .select('-__v ');
@@ -72,6 +73,7 @@ class UserService {
             .select('-__v ');
     }
 
+    //get all users available in the database
     async getAllUsers(pagination) {
         return await User.find({ 'deleted': false })
             .limit(10)
@@ -82,6 +84,7 @@ class UserService {
         // return await User.find({'deleted': false}).select('-user_type ');
     }
 
+    //get all user who deactivated their accounts
     async getAllDeletedUsers(pagination) {
         return await User.find({ 'deleted': true })
             .limit(10)
@@ -90,6 +93,7 @@ class UserService {
             .select('-__v ');
     }
 
+    //update a particular user. find them with their email address
     async updateUserByEmail(email, data) {
 
         //makes email case insensitive
@@ -99,6 +103,7 @@ class UserService {
             .select('-__v ');
     }
 
+    //delete a particular user. find them with their email address
     async deleteUser(email) {
         return await User.findOneAndUpdate({ 'email': email }, { 'deleted': true }, { new: true })
             .select('-__v ');;

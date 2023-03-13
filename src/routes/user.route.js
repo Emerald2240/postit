@@ -5,18 +5,23 @@ const { validateBody } = require("../validators/validatorBody");
 const { validateParams } = require("../validators/validatorParams");
 const authenticateToken = require('../middlewares/auth.middleware')
 const adminAuthorization = require("../middlewares/adminPriviledges.middleware")
-
 const { userHandleSchema, signUpSchema, emailSchema, userIdSchema, updateUserSchema } = require("../validators/schemas/user.schema");
+
 
 //documentation redirect
 userRouter.get("/docs", (req, res) => {
     res.redirect('https://documenter.getpostman.com/view/24521226/2s93JtQioa');
 });
 
-//Register Account
+//default response
+userRouter.get("/", (req, res) => {
+    res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
+});
+
+//register Account
 userRouter.post("/", [validateBody(signUpSchema)], userController.signUp);
 
-//Get all users with pagination [admin]
+//get all users with pagination [admin]
 userRouter.get("/:pagination", [authenticateToken, adminAuthorization], userController.fetchAllUsers);
 
 //get a particular user with email
@@ -34,7 +39,7 @@ userRouter.get("/deleted/:pagination", [authenticateToken, adminAuthorization], 
 //update your profile
 userRouter.patch("/", [validateBody(updateUserSchema), authenticateToken], userController.updateUserProfile);
 
-//Delete user account
+//delete user account
 userRouter.delete("/", [authenticateToken], userController.deleteUserAccount);
 
 
