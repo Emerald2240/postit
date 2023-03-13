@@ -42,7 +42,7 @@ node app.js
  - Read the terminal output to make sure that the server is running and the database is connected properly.
 
 
-Usage
+Short Sample Usage
 ------
 The API is comprised of three main resources: 
 - Users
