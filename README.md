@@ -89,7 +89,7 @@ Sample Response:
 }
 ```
 
-Once succesfully registered, create another post request to **localhost:5000/api/v1/auth/login**; supply it your email and password; if correct, you'll get a refresh token and access token, pass in the latter as a bearer token before making any requests, depending on your user type you should have access to most of the API resources.
+Once succesfully registered, create another post request to **localhost:5000/api/v1/auth/login**; supply it your email and password; if correct, you'll get a refresh token and access token, pass in the latter as a bearer token before making any requests, depending on your user type you should have access to most of the API resources. Checkout the documentations below for full details on how to consume the API.
 
 
 Documentation
