@@ -6,7 +6,7 @@ const { validateParams } = require("../validators/validatorParams");
 const authenticateToken = require('../middlewares/auth.middleware')
 const adminAuthorization = require("../middlewares/adminPriviledges.middleware")
 
-const { signUpSchema, emailSchema, userIdSchema, updateUserSchema } = require("../validators/schemas/user.schema");
+const { userHandleSchema, signUpSchema, emailSchema, userIdSchema, updateUserSchema } = require("../validators/schemas/user.schema");
 
 //CREATE
 //documentation redirect
@@ -23,6 +23,9 @@ userRouter.get("/:pagination", [authenticateToken, adminAuthorization], userCont
 
 //get a particular user with email
 userRouter.get("/email/:email", [validateParams(emailSchema), authenticateToken], userController.fetchUser);
+
+//get a particular user with handle
+userRouter.get("/handle/@:userHandle", [validateParams(userHandleSchema), authenticateToken], userController.fetchUserWithHandle);
 
 //get a particular user with user id
 userRouter.get("/id/:userId", [validateParams(userIdSchema), authenticateToken], userController.fetchUserWithId);
