@@ -25,6 +25,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    //same as avatar, but wrapped in html img tag to aid frontend developers
     avatar_wrapped: {
         type: String,
         required: true

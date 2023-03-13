@@ -3,6 +3,7 @@ const constants = require("../constants/constants");
 const { MESSAGES } = constants;
 
 class CommentController {
+    //default route response
     async getStatus(req, res) {
         res.status(200).send({ message: MESSAGES.DEFAULT, success: true });
     };
@@ -59,7 +60,7 @@ class CommentController {
         }
     }
 
-    //Get all comments by a particular user
+    //get all comments by a particular user
     async getAllUserComments(req, res) {
         let userId = req.params.userId;
         let pagination = req.params.pagination * 10;
@@ -89,7 +90,7 @@ class CommentController {
             .send({ message: MESSAGES.FETCHED, success: true, data });
     }
 
-    //Create a comment
+    //create a comment
     async comment(req, res) {
         let commentBody = {
             user_id: req.user._id,
@@ -113,7 +114,7 @@ class CommentController {
         }
     }
 
-    //Get all comments for a particular postit
+    //get all comments for a particular postit
     async getAllCommentsForPostit(req, res) {
         let postitId = req.params.postitId;
         let pagination = req.params.pagination * 10;
@@ -134,7 +135,7 @@ class CommentController {
         }
     }
 
-    //Get a particular comment with its comment ID
+    //get a particular comment with its comment ID
     async getParticularComment(req, res) {
         let commentId = req.params.commentId;
 
@@ -155,7 +156,7 @@ class CommentController {
         }
     }
 
-    //Use text to search for comments under a particular postit
+    //use text to search for comments under a particular postit
     async searchPostitComments(req, res) {
         let postitId = req.params.postitId;
         let pagination = req.params.pagination * 10;
@@ -178,7 +179,7 @@ class CommentController {
         }
     }
 
-    //Get all deleted comments under a particular postit
+    //get all deleted comments under a particular postit
     async getAllDeletedCommentsForPostit(req, res) {
         let postitId = req.params.postitId;
         let pagination = req.params.pagination * 10;
@@ -200,7 +201,7 @@ class CommentController {
         }
     }
 
-    //Get all comments deleted by a particular user
+    //get all comments deleted by a particular user
     async getAllUserDeletedComments(req, res) {
         let userId = req.params.userId;
         let pagination = req.params.pagination * 10;
@@ -221,7 +222,7 @@ class CommentController {
         }
     }
 
-    // Update a particular comment
+    //update a particular comment
     async editComment(req, res) {
         let commentId = req.params.commentId;
         let commentUpdateBody = req.body.body;
@@ -244,7 +245,7 @@ class CommentController {
         }
     }
 
-    //Delete a particular comment
+    //delete a particular comment
     async deleteComment(req, res) {
         let commentId = req.params.commentId;
         let userId = req.user._id;
