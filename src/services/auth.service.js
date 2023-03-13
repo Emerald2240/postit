@@ -26,6 +26,17 @@ class AuthService {
 
     }
 
+    async verifyUserExists(userId, email){
+        let emailRegexed = new RegExp(email, 'i');
+
+        const user = await User.findOne({'_id':userId, 'email': emailRegexed});
+        if(user){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
 
 module.exports = new AuthService();
