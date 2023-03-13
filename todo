@@ -1,6 +1,2 @@
 rewrite documentation and set it to live server(localhost to justpostit.render.com)
-type readme
-MOTIVATION: Choose a folder structure from Layered(MVC like) or Module(Domain Driven) and explain why you made your choice.
-MOTIVATION: Decide what you will do with deleted post-its, and in your readme, explain what you later did.
-MOTIVATION: Write what you considered when building this app of yours.
 pray to God it all ends well.*/3-+
