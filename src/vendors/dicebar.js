@@ -27,15 +27,15 @@ const avatarStyles = [
   'thumbs'
 ];
 
-
+//generates random avatar style from array above
 const getRandomAvatarStyle = () => {
-  
+
   // Your code here
   const random = Math.floor(Math.random() * avatarStyles.length);
   return avatarStyles[random];
 }
 
-
+//combines email and seed variable to generate truly random and unique avatar url
 const generateRandomAvatar = async (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -74,5 +74,6 @@ const generateRandomAvatar = async (email) => {
   return avatarUrl;
 }
 // @_learnable
+
 
 module.exports = { generateRandomAvatar }
